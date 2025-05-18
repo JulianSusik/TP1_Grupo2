@@ -18,27 +18,24 @@
             <a class="pelicula" href="detalle-pelicula.html">Peliculas</a>
             <a class="perfil" href="perfil.html">Perfil</a>
 
-        </nav>
-    </header>
-    <main class="main">
-
-        <section class="seccion-filtros">
-            <div class="filtros">
-                <label for="categoria">Categorias</label>
-                <select class="categorias" name="categoria" id="categoria">
-                    <option value="" selected disabled>Seleccione una categoría</option>
-                    <option value="Accion"> Accion </option>
-                    <option value="Drama"> Drama </option>
-                    <option value="Humor"> Humor </option>
-                    <option value="Terror"> Terror </option>
-
-
+        </nav></header>
+    <main class="main">         
+    <section class="seccion-filtros">             
+        <form method="get">                     
+            <div class="filtro-categoria">
+                <label for="categoria">Categorias</label>                     
+                <select class="categoria" name="categoria" id="categoria">                         
+                    <option value="" selected disabled>Seleccione una categoría</option>                         
+                    <option value="accion">Accion</option>                         
+                    <option value="drama">Drama</option>                         
+                    <option value="humor">Humor</option>                         
+                    <option value="terror">Terror</option>                       
                 </select>
-            </div>
-            <input class="buscar" type="search" id="buscar" name="buscar" placeholder="Buscar por nombre">
-        </section>
-
-    </main>
+            </div>                 
+            <input class="buscar" type="search" id="buscar" name="buscar" placeholder="Buscar por nombre">             
+        </form>         
+    </section>      
+</main>
     <img class="img_vista" src="c:\Users\Julian\Pictures\vistaPantalla-principal.PNG" alt="">
 </body>
 

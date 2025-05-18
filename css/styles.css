@@ -5,8 +5,8 @@
 
 .header {
   background-color: white;
-  border: 2px solid #000;
-  padding: 5px 0;
+  border: 0.125rem solid #000;
+  padding: 0.3125rem 0;
 
 
 }
@@ -25,11 +25,11 @@
   justify-content: center;
   text-decoration: none;
   color: #000;
-  padding: 5px;
+  padding: 0.3125rem;
   transition: all 0.3s ease;
   font-size: 1.3rem;
   position: relative;
-  border-right: 2px solid #000;
+  border-right: 0.125rem solid #000;
   height: 100%;
 }
 
@@ -42,46 +42,60 @@
 .header_nav a:hover {
   color: #e20808;
   background-color: rgba(185, 185, 185, 0.6);
-  border-radius: 5px
+  border-radius: 0.3125rem;
 }
 
 .img_vista {
   padding: 1rem;
 }
 
-.main {
-  display: grid;
-  padding: 2em;
-  grid-template-columns: repeat(2, 2fr);
+.main{
 
+   padding: 1.25rem;
 }
 
-.seccion-filtros {
-  grid-column: 1 / -1;
+
+
+form{
   display: flex;
-  justify-content: space-between;
-
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+    background-color: #fff;
 }
 
-.filtros {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+.filtro-categoria {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
 }
 
-
-
-.categorias {
-  border: 0.2em none #000;
-  border-radius: 0.3rem;
-  width: 200px;
-  height: 2rem;
+.seccion-filtros label {
+    font-size: 1rem;
+    color: #333;
+    margin: 0;
+}
+.categoria {
+    padding:  0.5rem 0.75rem;;
+    border:  0.06rem  solid #ccc;
+    border-radius: 0.25rem;
+    font-size: medium;
+    background-color: white;
+     min-width: 12.5rem;
+    cursor: pointer;
+    
 }
 
 .buscar {
-  border: 0.2em solid #000;
-  border-radius: 3rem;
-  width: 25%;
-  height: 2rem;
+    padding: 0.5rem 0.75rem;;
+    border:  0.0625rem  solid #ccc;
+    border-radius: 1.25rem;
+    font-size: 0.875rem;;
+    width: 15.625rem;
+    background-color: white;
 }
+
+
+
+
 
