@@ -1,6 +1,7 @@
 * {
   margin: 0;
   padding: 0;
+  
 }
 
 .header {
@@ -40,7 +41,7 @@
 
 
 .header_nav a:hover {
-  color: #e20808;
+
   background-color: rgba(185, 185, 185, 0.6);
   border-radius: 0.3125rem;
 }
@@ -62,6 +63,7 @@ form{
     justify-content: space-between;
     padding: 1rem 1.25rem;
     background-color: #fff;
+   
 }
 
 .filtro-categoria {
@@ -71,31 +73,51 @@ form{
 }
 
 .seccion-filtros label {
-    font-size: 1rem;
+    font-size: 1.2rem;
     color: #333;
     margin: 0;
 }
 .categoria {
     padding:  0.5rem 0.75rem;;
-    border:  0.06rem  solid #ccc;
+    border:  0.06rem  solid #3f3f3f;
     border-radius: 0.25rem;
-    font-size: medium;
+    font-size: 1rem;
     background-color: white;
      min-width: 12.5rem;
     cursor: pointer;
-    
+   
+}
+
+.categoria option {
+  border-right: 1px solid #000000;
 }
 
 .buscar {
-    padding: 0.5rem 0.75rem;;
-    border:  0.0625rem  solid #ccc;
+    padding: 0.5rem 0.75rem 0.5rem 2rem;
+    border:  0.0625rem  solid #3f3f3f;
     border-radius: 1.25rem;
-    font-size: 0.875rem;;
-    width: 15.625rem;
+    font-size: 0.875rem;
+    width: 20rem;
     background-color: white;
 }
 
+.icon-header{
+ padding-right: 0.5rem;
+}
 
+div {
+  position: relative;
+  display: inline-block;
+}
+
+.icon-filtro{
+  position: absolute;
+  top: 8px;
+  left: 10px;
+
+  width: 20px;
+  height: 20px;
+}
 
 
 
