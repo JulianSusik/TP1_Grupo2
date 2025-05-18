@@ -16,7 +16,7 @@
   grid-template-columns: repeat(4, 1fr);
   align-items: center;
   text-align: center;
-  
+
 }
 
 .header_nav a {
@@ -48,3 +48,40 @@
 .img_vista {
   padding: 1rem;
 }
+
+.main {
+  display: grid;
+  padding: 2em;
+  grid-template-columns: repeat(2, 2fr);
+
+}
+
+.seccion-filtros {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+
+}
+
+.filtros {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+
+
+.categorias {
+  border: 0.2em none #000;
+  border-radius: 0.3rem;
+  width: 200px;
+  height: 2rem;
+}
+
+.buscar {
+  border: 0.2em solid #000;
+  border-radius: 3rem;
+  width: 25%;
+  height: 2rem;
+}
+
