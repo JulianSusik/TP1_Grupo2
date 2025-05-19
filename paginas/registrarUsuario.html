@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../css/registerStyless.css" rel="stylesheet">
+    <title>Register</title>
+</head>
+
+<body>
+    <header class="primary__header">
+        <h1 class="primary__header__h2">Registrarse</h1>
+    </header>
+    <main class="primary__main">
+        <form class="primary__main__form">
+            <div class="primary__main__form__divLeft">
+                <label class="primary__main__form__divLeft__label" for="nombre">Nombre</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Ingrese su nombre" required>
+                <label class="primary__main__form__divLeft__label" for="apellido">Apellido</label>
+                <input type="text" id="apellido" name="apellido" placeholder="Ingrese su apellido" required>
+                <label class="primary__main__form__divLeft__label" for="correo">E-mail</label>
+                <input type="email" id="correo" name="correo" placeholder="Ingrese email" required>
+                <label class="primary__main__form__divLeft__label" for="usuario">Nombre de usuario</label>
+                <input type="text" id="usuario" name="usuario" placeholder="Nombre de usuario" required>
+                <label class="primary__main__form__divLeft__label" for="contrasenia">Contraseña</label>
+                <input type="password" id="contrasenia" name="contrasenia" placeholder="Contraseña" required>
+                <label class="primary__main__form__divLeft__label" for="contraseniaB">Repetir contraseña</label>
+                <input type="password" id="contraseniaB" name="contraseniaB" placeholder="Repetir contraseña" required>
+            </div>
+            <div class="primary__main__form__divRight">
+                <p>Método de pago</p>
+
+                <label class="primary__main__form__divRight__label">
+                    <input type="radio" id="tarjeta" name="metodoPago">
+                    Tarjeta de crédito
+                </label>
+                <div class="primary__main__form__divRight__datosTarjeta">
+                    <input type="text" id="numeroTarjeta" name="numeroTarjeta" placeholder="Numero de tarjeta">
+                    <input type="text" id="codTarjeta" name="codTarjeta" placeholder="XXX">
+                </div>
+
+                <label class="primary__main__form__divRight__label">
+                    <input type="radio" id="cupon" name="metodoPago">
+                    Cupón de pago
+                    <div class="primary__main__form__divRight__cupon">
+                        <label class="primary__main__form__divRight__label--sublabel"><input type="checkbox"
+                                name="tipoCupon" id="pago-facil" value="pago-facil"> Pago Fácil</label>
+                        <label class="primary__main__form__divRight__label--sublabel"><input type="checkbox"
+                                name="tipoCupon" id="rapi-pago" value="rapi-pago"> RapiPago</label>
+                    </div>
+                </label>
+
+                <label class="primary__main__form__divRight__label">
+                    <input type="radio" id="transferencia" name="metodoPago">
+                    Transferencia bancaria
+                </label>
+                <div class="primary__main__form__divRight__transferencia">
+                    <p>CBU : 2183909411100018971375</p>
+                </div>
+
+                <div class="primary__main__form__divRight__buttons">
+                <button id="buttonConfirm">Confirmar</button>
+                <button id="buttonCancel">Cancelar</button>
+                </div>
+            </div>
+
+        </form>
+    </main>
+</body>
+
+</html>

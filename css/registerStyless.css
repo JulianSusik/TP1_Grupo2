@@ -1,0 +1,154 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.primary__header {
+    width: 35%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin: 2em 3em;
+}
+
+.primary__main {
+    width: 90%;
+    margin: auto;
+    height: 65vh;
+}
+
+.primary__main__form {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 1.5em;
+}
+
+.primary__main__form__divLeft {
+    width: 50%;
+    height: 70%;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    gap: 1em 0;
+}
+
+.primary__main__form__divButtons {
+    width: 100%;
+
+}
+
+.primary__main__form__divLeft__label {
+    width: 80%;
+    text-align: right;
+    font-size: 1em;
+    align-content: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#nombre,
+#apellido,
+#correo,
+#usuario,
+#contrasenia,
+#contraseniaB {
+    width: 75%;
+    height: 2em;
+    padding-left: 0.5em;
+}
+
+
+.primary__main__form__divRight {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1em;
+}
+
+.primary__main__form__divRight__transferencia p {
+    width: 70%;
+    margin: 1em 0em 0em 5em;
+}
+
+.primary__main__form__divRight__transferencia__cbu {
+    width: 60%;
+}
+
+.primary__main__form__divRight__label {
+    width: 100%;
+    margin: 0em 0em 0.5em 1.5em;
+}
+
+.primary__main__form__divRight--sublabel {
+    width: 100%;
+    margin: 0.5em 0em 0.5em 1.5em;
+}
+
+#pago-facil,
+#rapi-pago {
+    margin: 1em 0.5em 0em 1.5em;
+}
+
+#tarjeta,
+#cupon,
+#transferencia {
+    margin: 2em 0.5em 0em 0em;
+}
+
+.primary__main__form__divRight__cupon {
+    width: 55%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#numeroTarjeta {
+    width: 50%;
+    height: 2.5em;
+    margin-left: 4em;
+    padding-left: 0.5em;
+}
+
+#codTarjeta {
+    width: 10%;
+    height: 2.5em;
+    margin-left: 1em;
+    padding-left: 0.5em;
+}
+
+.primary__main__form__divRight__buttons {
+    width: 100%;
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    margin-top: 3em;
+    gap: 3em;
+}
+
+#buttonConfirm {
+    width: 30%;
+    height: 40%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: rgb(144, 238, 144);
+    border: 2px solid rgb(0, 0, 0);
+    border-radius: 0.5em;
+}
+
+#buttonCancel {
+    width: 30%;
+    height: 40%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: rgb(223, 50, 50);
+    border: 2px solid rgb(0, 0, 0);
+    border-radius: 0.5em;
+}
+
+@media screen and (max-width:768px) {
+    .primary__main__form {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+}
+    
+}
