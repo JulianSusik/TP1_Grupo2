@@ -1,7 +1,7 @@
 * {
   margin: 0;
   padding: 0;
-  
+
 }
 
 .header {
@@ -48,42 +48,44 @@
 
 
 
-.main{
+.main {
 
-   padding: 1.25rem;
+  padding: 20px 0;
 }
 
 
 
-form{
+form {
   display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem 1.25rem;
-    background-color: #fff;
-   
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  background-color: #fff;
+
 }
 
 .filtro-categoria {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
 }
 
 .seccion-filtros label {
-    font-size: 1.2rem;
-    color: #333;
-    margin: 0;
+  font-size: 1.2rem;
+  color: #333;
+  margin: 0;
 }
+
 .categoria {
-    padding:  0.5rem 0.75rem;;
-    border:  0.06rem  solid #3f3f3f;
-    border-radius: 0.25rem;
-    font-size: 1rem;
-    background-color: white;
-     min-width: 12.5rem;
-    cursor: pointer;
-   
+  padding: 0.5rem 0.75rem;
+  ;
+  border: 0.06rem solid #3f3f3f;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  background-color: white;
+  min-width: 12.5rem;
+  cursor: pointer;
+
 }
 
 option {
@@ -91,16 +93,16 @@ option {
 }
 
 .buscar {
-    padding: 0.5rem 0.75rem 0.5rem 2rem;
-    border:  0.0625rem  solid #3f3f3f;
-    border-radius: 1.25rem;
-    font-size: 0.875rem;
-    width: 20rem;
-    background-color: white;
+  padding: 0.5rem 0.75rem 0.5rem 2rem;
+  border: 0.0625rem solid #3f3f3f;
+  border-radius: 1.25rem;
+  font-size: 0.875rem;
+  width: 20rem;
+  background-color: white;
 }
 
-.icon-header{
- padding-right: 0.5rem;
+.icon-header {
+  padding-right: 0.5rem;
 }
 
 div {
@@ -108,7 +110,7 @@ div {
   display: inline-block;
 }
 
-.icon-filtro{
+.icon-filtro {
   position: absolute;
   top: 8px;
   left: 10px;
@@ -118,32 +120,34 @@ div {
 }
 
 .contenido {
-    padding: 1.25rem; 
-    max-width: 75rem;
-    margin: 0 auto; 
+  padding: 0.5rem;
+  max-width: 80%;
+  margin: 0 auto;
 }
+
 .grilla-contenido {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); 
-    grid-template-rows: repeat(3, 1fr);
-    gap: 0.9375rem;
-    margin-top: 1.25rem; 
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 0.5rem;
+  margin-top: 0.5rem;
 }
 
 .tarjeta-contenido {
-    display: block; 
-    overflow: hidden; 
-    box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.1); 
-    cursor: pointer;
-    background-color: white;
-    text-decoration: none; 
+  display: block;
+
+
+  cursor: pointer;
+  background-color: white;
+  text-decoration: none;
 }
 
 
 .tarjeta-contenido img {
-    width: 100%;
-    height: 12.5rem; 
-    object-fit: cover; 
-    object-position: center; 
-    display: block;
+  width: 100%;
+  height: 12.5rem;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+
 }
