@@ -20,7 +20,7 @@ body {
 
 /*Header con estilos para el banner*/
 .header__primary {
-    background-image: url("../assets/bannerPC.png");
+    background-image: url("../images/bannerPC.png");
     background-size: cover;
     background-position: center;
     border-radius: 1.8rem;
