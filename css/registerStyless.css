@@ -18,13 +18,13 @@
 .primary__main__form {
     width: 100%;
     height: 100%;
-    display: flex;
-    flex-direction: row;
-    gap: 1.5em;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2em;
 }
 
 .primary__main__form__divLeft {
-    width: 50%;
+    width: 100%;
     height: 70%;
     display: grid;
     grid-template-columns: 50% 50%;
@@ -57,7 +57,7 @@
 
 
 .primary__main__form__divRight {
-    width: 45%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -143,12 +143,8 @@
 }
 
 @media screen and (max-width:768px) {
-    .primary__main__form {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5em;
-}
-    
+  .primary__main__form {
+    grid-template-columns: 1fr; /* una columna */
+  }
+
 }
