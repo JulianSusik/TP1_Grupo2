@@ -1,0 +1,152 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.flex-row{
+    display: flex;
+    flex-direction: row;
+    
+}
+.imagen{
+    width: 10%;
+}
+.perfil{
+    margin-top: 5%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.perfil__avatar{
+    width: 8%;
+    display: flex;
+    flex-direction: column;
+    margin-left: -3%;
+    margin-top: -2%;
+    text-align: center;
+
+}
+.perfil__avatar img{
+    border-radius: 50%;
+    border: 1px solid black;
+}
+.perfil__datos{
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    margin: 2%;
+}
+.perfil__datos-grupo{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+.perfil__metodo-pago{
+    width: 30%;
+    margin: 2% 0 0 2%;
+}
+.perfil__metodo-pago_tipo{
+    padding-left: 4%;
+    margin-top: 10px;
+}
+.perfil__metodo-pago_tipo-credito{
+    padding-left: 20px;
+    margin-bottom: 15px;
+    gap: 5px;
+}
+.perfil__metodo-pago_tipo-credito input{
+    padding: 7px;
+}
+.perfil__metodo-pago_tipo-credito input:last-child{
+    width: 30px;
+    
+}
+.perfil__metodo-pago_tipo-cupon{
+    gap: 10px;
+    margin-left:25px ;
+    margin-bottom: 15px;
+}
+.perfil__metodo-pago_tipo p:last-child{
+    margin-top: 15px;
+    text-align: center;
+}
+.botones{
+    display: flex;
+    justify-content: center;
+
+}
+.formulario{
+    margin-top: 40px;
+    gap: 80px;
+}
+/* VISTA HASTA 768PX - LAPTOP */
+@media screen and (max-width:768px) {
+    .perfil{
+    margin-top: 3%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    }
+    .perfil__avatar{
+        margin: 0 0 50px 0;
+        width: 20%;
+    }
+    .perfil__datos{
+        width: 100%;
+        margin: 40px 0;
+    }
+    .perfil__datos-grupo{
+        justify-content: space-around;
+    }
+    .perfil__metodo-pago{
+        width: 100%;
+        margin: 0;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+        margin: 50px 0;
+    }
+    .perfil__metodo-pago_tipo{
+        padding-left: 0;
+    }
+    .perfil__metodo-pago_tipo p:last-child{
+        margin-top: 20px;
+    }
+    .perfil__metodo-pago_tipo-credito{
+        margin: 20px 0 20px 45px;
+        gap: 5px;
+    }
+    .perfil__metodo-pago_tipo-cupon{
+        margin: 20px 0 20px 45px;
+    }
+}
+/* VISTA HASTA 375px - LAPTOP */
+@media screen and (max-width:425px) {
+    .perfil__metodo-pago{
+        flex-direction: column;
+        margin-top: 15px;
+    }
+    .perfil__metodo-pago p:first-child{
+        flex-direction: column;
+        margin-bottom: 15px;
+    }
+        .perfil__metodo-pago_tipo{
+        padding-left: 0;
+    }
+    .perfil__metodo-pago_tipo p:last-child{
+        margin-top: 20px;
+    }
+    .perfil__metodo-pago_tipo-credito{
+        margin: 15px 0 25px 0px;
+        gap: 5px;
+    }
+    .perfil__metodo-pago_tipo-cupon{
+        margin: 20px 0 20px 0px;
+        padding-left: 25px;
+    }
+    .formulario{
+    margin-top: 40px;
+    gap: 40px;
+}
+}
