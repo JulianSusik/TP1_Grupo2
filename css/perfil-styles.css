@@ -15,6 +15,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+    
 }
 .perfil__avatar{
     width: 8%;
@@ -23,8 +24,9 @@
     margin-left: -3%;
     margin-top: -2%;
     text-align: center;
-
+    text-decoration: underline;
 }
+
 .perfil__avatar img{
     border-radius: 50%;
     border: 1px solid black;
@@ -34,20 +36,30 @@
     display: flex;
     flex-direction: column;
     margin: 2%;
+    border-right-style: ridge;
+    padding-right: 15px;
 }
 .perfil__datos-grupo{
     display: flex;
     justify-content: space-between;
-    margin-bottom: 15px;
+    margin-top: 15px;
+}
+.perfil__datos-grupo input{
+    padding: 2px;
 }
 .perfil__metodo-pago{
     width: 30%;
-    margin: 2% 0 0 2%;
+    margin: 2% 0 0 0%;
+}
+h4{
+    text-decoration: underline;
+    text-align: center;
 }
 .perfil__metodo-pago_tipo{
     padding-left: 4%;
     margin-top: 10px;
 }
+
 .perfil__metodo-pago_tipo-credito{
     padding-left: 20px;
     margin-bottom: 15px;
@@ -72,11 +84,36 @@
 .botones{
     display: flex;
     justify-content: center;
-
+    margin-top: 10%;
+    gap: 20px;
+    margin-bottom: 20px;
 }
-.formulario{
-    margin-top: 40px;
-    gap: 80px;
+.btn{
+    border-radius: 15px;
+    padding: 15px;
+    cursor: pointer;
+    border: none;
+    transition: ease .5s;
+}
+.btn1{
+    background-color: #91f883;
+}
+.btn1:hover{
+    background-color: #36da20;
+    border-radius: 25px;
+}
+.btn2{
+    background-color: rgb(252, 141, 141);
+}
+.btn2:hover{
+    background-color: rgb(218, 69, 69);
+    border-radius: 25px;
+}
+/*      MEDIAQUERY */
+@media screen and (max-width:1012px) and (min-width: 769px){
+ .perfil__datos-grupo input{
+    width: 120px;
+}   
 }
 /* VISTA HASTA 768PX - LAPTOP */
 @media screen and (max-width:768px) {
@@ -94,18 +131,22 @@
     .perfil__datos{
         width: 100%;
         margin: 40px 0;
+        border-right-style: none;
+        padding: 0;
     }
     .perfil__datos-grupo{
         justify-content: space-around;
     }
     .perfil__metodo-pago{
         width: 100%;
-        margin: 0;
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         align-items: center;
         justify-content: space-around;
         margin: 50px 0;
+    }
+    h4{
+        margin-bottom: 15px;
     }
     .perfil__metodo-pago_tipo{
         padding-left: 0;
