@@ -1,0 +1,14 @@
+footer{
+    background-color: lightgrey;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px;
+    align-items: center;
+}
+.footer__izquierda{
+    margin-left: 25px;
+}
+.footer__derecha{
+    margin-right: 25px;
+}
