@@ -1,8 +1,10 @@
 
 .main_detalle {
-    font-family: Arial, sans-serif;
     color: #1f2937;
     margin-top: 10px;
+}
+body{
+    background-color: #c9c6ff;
 }
 
 .contenedor {
@@ -61,7 +63,6 @@
 }
 
 .similares {
-    background-color: #fdfdfd;
     padding: 15px;
     border-radius: 6px;
     margin-top: 30px;

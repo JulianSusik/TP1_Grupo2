@@ -1,6 +1,10 @@
 *{
     margin: 0;
     padding: 0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+body{
+    background-color: #c9c6ff;
 }
 .header_nav a:last-of-type {
     background-color: lightgrey;
@@ -40,15 +44,15 @@
     flex-direction: column;
     margin: 2%;
     border-right-style: ridge;
-    padding-right: 15px;
+    padding-right: 2em;
 }
 .perfil__datos-grupo{
     display: flex;
     justify-content: space-between;
-    margin-top: 15px;
+    margin-top: 2em;
 }
 .perfil__datos-grupo input{
-    padding: 2px;
+    padding: 0.2em;
 }
 .perfil__metodo-pago{
     width: 30%;
@@ -60,40 +64,40 @@ h4{
 }
 .perfil__metodo-pago_tipo{
     padding-left: 4%;
-    margin-top: 10px;
+    margin-top: 0.5em;
 }
 
 .perfil__metodo-pago_tipo-credito{
-    padding-left: 20px;
-    margin-bottom: 15px;
-    gap: 5px;
+    padding-left: 1.2em;
+    margin-bottom: 1em;
+    gap: 0.3em;
 }
 .perfil__metodo-pago_tipo-credito input{
-    padding: 7px;
+    padding: 0.5em;
 }
 .perfil__metodo-pago_tipo-credito input:last-child{
-    width: 30px;
+    width: 1.8em;
     
 }
 .perfil__metodo-pago_tipo-cupon{
-    gap: 10px;
-    margin-left:25px ;
-    margin-bottom: 15px;
+    gap: 0.7em;
+    margin-left:1.5em ;
+    margin-bottom: 0.9em;
 }
 .perfil__metodo-pago_tipo p:last-child{
-    margin-top: 15px;
+    margin-top: 0.9em;
     text-align: center;
 }
 .botones{
     display: flex;
     justify-content: center;
     margin-top: 10%;
-    gap: 20px;
-    margin-bottom: 20px;
+    gap: 1.25em;
+    margin-bottom: 1.25em;
 }
 .btn{
-    border-radius: 15px;
-    padding: 15px;
+    border-radius: 1em;
+    padding: 1em;
     cursor: pointer;
     border: none;
     transition: ease .5s;
@@ -103,14 +107,14 @@ h4{
 }
 .btn1:hover{
     background-color: #36da20;
-    border-radius: 25px;
+    border-radius: 1.5em;
 }
 .btn2{
     background-color: rgb(252, 141, 141);
 }
 .btn2:hover{
     background-color: rgb(218, 69, 69);
-    border-radius: 25px;
+    border-radius: 1.5em;
 }
 /*      MEDIAQUERY */
 @media screen and (max-width:1012px) and (min-width: 769px){
@@ -133,7 +137,7 @@ h4{
     }
     .perfil__datos{
         width: 100%;
-        margin: 40px 0;
+        margin: 2.5em 0;
         border-right-style: none;
         padding: 0;
     }
@@ -146,51 +150,51 @@ h4{
         flex-direction: column;
         align-items: center;
         justify-content: space-around;
-        margin: 50px 0;
+        margin: 3.125em 0;
     }
     h4{
-        margin-bottom: 15px;
+        margin-bottom: 1em;
     }
     .perfil__metodo-pago_tipo{
         padding-left: 0;
     }
     .perfil__metodo-pago_tipo p:last-child{
-        margin-top: 20px;
+        margin-top: 1.25em;
     }
     .perfil__metodo-pago_tipo-credito{
-        margin: 20px 0 20px 45px;
-        gap: 5px;
+        margin: 1.25em 0 1.25em 2.8em;
+        gap: 0.3em;
     }
     .perfil__metodo-pago_tipo-cupon{
-        margin: 20px 0 20px 45px;
+        margin: 1.25em 0 1.25em 2.8em;
     }
 }
 /* VISTA HASTA 375px - LAPTOP */
 @media screen and (max-width:425px) {
     .perfil__metodo-pago{
         flex-direction: column;
-        margin-top: 15px;
+        margin-top: 1em;
     }
     .perfil__metodo-pago p:first-child{
         flex-direction: column;
-        margin-bottom: 15px;
+        margin-bottom: 1em;
     }
         .perfil__metodo-pago_tipo{
         padding-left: 0;
     }
     .perfil__metodo-pago_tipo p:last-child{
-        margin-top: 20px;
+        margin-top: 1.25em;
     }
     .perfil__metodo-pago_tipo-credito{
-        margin: 15px 0 25px 0px;
-        gap: 5px;
+        margin: 1em 0 1.5em 0;
+        gap: 0.3em;
     }
     .perfil__metodo-pago_tipo-cupon{
-        margin: 20px 0 20px 0px;
-        padding-left: 25px;
+        margin: 1.25em 0 1.25em 0px;
+        padding-left: 1.5em;
     }
     .formulario{
-    margin-top: 40px;
-    gap: 40px;
+    margin-top: 2.5em;
+    gap: 2.5em;
 }
 }

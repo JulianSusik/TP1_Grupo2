@@ -1,7 +1,11 @@
-.main {
+body{
+  background-color: #c9c6ff;
+}
 
+.main {
   padding: 20px 0;
 }
+
 
 .header_nav a:nth-of-type(2) {
     background-color: lightgrey;
@@ -12,7 +16,7 @@ form {
   align-items: center;
   justify-content: space-between;
   padding: 1rem 1.25rem;
-  background-color: #fff;
+  background-color: #c9c6ff;
 
 }
 .filtro-categoria {
@@ -79,7 +83,7 @@ div {
 .grilla-contenido {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
   gap: 0.5rem;
   margin-top: 0.5rem;
 }
