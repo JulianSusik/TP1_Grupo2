@@ -37,7 +37,9 @@
 .header_nav a:last-of-type {
   border-right: none;
 }
-
+.header_nav a:first-of-type {
+    background-color: lightgrey;
+}
 
 
 .header_nav a:hover {
