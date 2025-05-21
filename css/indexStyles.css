@@ -82,6 +82,9 @@ body {
     cursor: pointer;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
+.main__primary__form__sendButton:hover{
+    background-color: #36da20;
+}
 
 /*Estilo para los links*/
 .main__primary__divCase {

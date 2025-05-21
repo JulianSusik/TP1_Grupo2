@@ -3,7 +3,7 @@ footer{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 20px;
+    padding: 1.25em;
     align-items: center;
 }
 .footer__izquierda{

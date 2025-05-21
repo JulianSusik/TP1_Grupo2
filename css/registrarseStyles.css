@@ -141,9 +141,15 @@ Flex-start para juntar los sub-label rapipago y pago facil
 #buttonConfirm {
     background-color: rgb(144, 238, 144);
 }
+#buttonConfirm:hover {
+    background-color: rgb(22, 206, 22);
+}
 
 #buttonCancel {
     background-color: rgb(223, 50, 50);
+}
+#buttonCancel:hover {
+    background-color: rgb(241, 0, 0);
 }
 
 @media screen and (max-width:768px) {

@@ -83,9 +83,15 @@ body {
 .main__primary__form--items--buttonA {
     background-color: rgb(144, 238, 144);
 }
+.main__primary__form--items--buttonA:hover {
+    background-color: rgb(4, 187, 4);
+}
 
 .main__primary__form--items--buttonB {
     background-color: rgb(223, 50, 50);
+}
+.main__primary__form--items--buttonB:hover {
+    background-color: rgb(206, 1, 1);
 }
 
 @media screen and (max-width:768px) {

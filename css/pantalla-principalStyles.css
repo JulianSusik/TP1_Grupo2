@@ -10,15 +10,10 @@ body{
     background-color: lightgrey;
 }
 
-
-
-
 .main {
 
-  padding: 20px 0;
+  padding: 1.25em 0;
 }
-
-
 
 form {
   display: flex;
