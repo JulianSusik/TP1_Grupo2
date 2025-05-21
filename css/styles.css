@@ -112,11 +112,11 @@ div {
 
 .icon-filtro {
   position: absolute;
-  top: 8px;
-  left: 10px;
+  top: 0.5rem;
+  left: 0.625rem;
 
-  width: 20px;
-  height: 20px;
+  width: 1.25rem;
+  height: 1.25rem;
 }
 
 .contenido {
@@ -149,10 +149,7 @@ div {
   object-fit: cover;
   object-position: center;
   display: block;
-  transition: transform 0.3s ease;
-}
-.tarjeta-contenido:hover img {
-  transform: scale(1.1);
+
 }
 
 
