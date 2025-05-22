@@ -96,11 +96,15 @@ h4{
     margin-bottom: 1.25em;
 }
 .btn{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 0.9em;
     border-radius: 1em;
     padding: 1em;
     cursor: pointer;
     border: none;
     transition: ease .5s;
+    text-decoration: none;
+    color: inherit;
 }
 .btn1{
     background-color: #91f883;

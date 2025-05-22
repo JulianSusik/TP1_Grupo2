@@ -70,10 +70,13 @@ body {
 }
 
 /*Estilos base de AMBOS botones*/
-.main__primary__form--items button {
+.main__primary__form--items button,
+a {
+    font-size: 1em;
     width: 15em;
-    height: 2.5em;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border: 2px solid rgb(0, 0, 0);
     border-radius: 0.5em;
     cursor: pointer;
@@ -81,15 +84,23 @@ body {
 
 /*Colores de cada boton*/
 .main__primary__form--items--buttonA {
+    height: 2.5em;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     background-color: rgb(144, 238, 144);
 }
+
 .main__primary__form--items--buttonA:hover {
     background-color: rgb(4, 187, 4);
 }
 
 .main__primary__form--items--buttonB {
+    height: 2.25em;
+    text-decoration: none;
+    color: inherit;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     background-color: rgb(223, 50, 50);
 }
+
 .main__primary__form--items--buttonB:hover {
     background-color: rgb(206, 1, 1);
 }

@@ -2,9 +2,11 @@
     margin: 0;
     padding: 0;
 }
+
 body {
     background-color: #c9c6ff;
 }
+
 .primary__header {
     width: 35%;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -119,6 +121,7 @@ Flex-start para juntar los sub-label rapipago y pago facil
 
 /*Estilos para el div de botones*/
 .primary__main__form__sectionRight__buttons {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     width: 100%;
     height: 20%;
     display: flex;
@@ -129,9 +132,11 @@ Flex-start para juntar los sub-label rapipago y pago facil
 }
 
 /*Estilos en comun para ambos botones, luego con el ID les asignamos colores*/
-.primary__main__form__sectionRight__buttons button {
+.primary__main__form__sectionRight__buttons button,
+a {
     width: 11em;
-    height: 2.5em;
+    height: 2.25em;
+    font-size: 1em;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     border: 2px solid rgb(0, 0, 0);
     border-radius: 0.5em;
@@ -141,18 +146,28 @@ Flex-start para juntar los sub-label rapipago y pago facil
 #buttonConfirm {
     background-color: rgb(144, 238, 144);
 }
+
 #buttonConfirm:hover {
     background-color: rgb(22, 206, 22);
 }
 
-#buttonCancel {
+
+.primary__main__form__sectionRight__buttons--cancelar {
+    height: 2em;
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+    color: inherit;
+    align-items: center;
     background-color: rgb(223, 50, 50);
 }
-#buttonCancel:hover {
+
+.primary__main__form__sectionRight__buttons--cancelar:hover {
     background-color: rgb(241, 0, 0);
 }
 
 @media screen and (max-width:768px) {
+
     /*Modificamos a una columna sola*/
     .primary__main__form {
         grid-template-columns: 1fr;
@@ -161,17 +176,21 @@ Flex-start para juntar los sub-label rapipago y pago facil
 }
 
 @media screen and (max-width:465px) {
+
     /*Modificamos a una columna sola*/
     .primary__main__form {
         grid-template-columns: 1fr;
     }
+
     /*Mas width a las secciones y menor tamaño de fuentes*/
-    .primary__main__form__sectionLeft, .primary__main__form__sectionRight {
+    .primary__main__form__sectionLeft,
+    .primary__main__form__sectionRight {
         font-size: 0.8em;
         width: 90%;
     }
+
     /*Reducimos el tamaño de los botones*/
-    .primary__main__form__sectionRight__buttons button{
+    .primary__main__form__sectionRight__buttons button {
         width: 10em;
     }
 }
