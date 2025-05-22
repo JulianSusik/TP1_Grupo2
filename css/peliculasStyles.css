@@ -1,12 +1,14 @@
-body{
+body {
   background-color: #c9c6ff;
 }
+
 .main {
 
   padding: 1.25em 0;
 }
+
 .header_nav a:nth-of-type(3) {
-    background-color: lightgrey;
+  background-color: lightgrey;
 }
 
 
@@ -17,6 +19,7 @@ form {
   padding: 1rem 1.25rem;
 
 }
+
 .filtro-categoria {
   display: flex;
   align-items: center;
@@ -104,6 +107,7 @@ div {
   display: block;
   transition: transform 0.3s ease;
 }
+
 .tarjeta-contenido:hover img {
   transform: scale(1.1);
 }
@@ -155,5 +159,5 @@ div {
     gap: 1rem;
     width: 100%;
   }
-  
+
 }

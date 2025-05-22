@@ -1,8 +1,9 @@
-*{
+* {
   margin: 0;
   padding: 0;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
+
 .header {
   background-color: white;
   border: 0.125rem solid #000;
@@ -17,6 +18,7 @@
   text-align: center;
 
 }
+
 .icon-header {
   padding-right: 0.5rem;
 }
