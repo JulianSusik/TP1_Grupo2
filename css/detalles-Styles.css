@@ -17,6 +17,7 @@ body {
     display: flex;
     gap: 1.25em;
     flex-wrap: wrap;
+    margin-left: 0.4em;
 }
 
 .video_detalle {
@@ -43,7 +44,7 @@ body {
     border: none;
     border-radius: 0.25em;
     cursor: pointer;
-    width: 100%;
+    width: 95%;
     max-width: 25em;
     box-sizing: border-box;
     text-align: center;
@@ -54,13 +55,27 @@ body {
 }
 
 .detalle_pelicula {
+    margin-left: 0em;
     flex: 2;
     line-height: 1.4em;
 }
-
+.linkActores{
+    color: #1f2937;
+}
+.linkActores:hover{
+    text-decoration: underline;
+}
 .detalle_pelicula p {
     margin: 0.375em 0;
 }
+
+.temporadaYCapitulos{
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+}
+
+
 
 .similares {
     padding: 1em;
@@ -115,7 +130,7 @@ body {
     }
 
     .video_detalle iframe {
-        max-width: 100%;
+        width: 100%;
     }
 
     .boton_ver {
