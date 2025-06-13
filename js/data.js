@@ -70,6 +70,10 @@ const howIMeetYourMother = {
         iframe: 'https://www.youtube.com/embed/8lguc5Ota4U',
         urlVideo: 'https://www.youtube.com/watch?v=cjJLEYMzpjc&pp=ygUdaG93IGkgbWV0IHlvdXIgbW90aGVyIHRyYWlsZXI%3D'
     },
+    imagen:{
+        url: "../images/howimet.jfif",
+        alt: "Poster How I Meet Your Mother"
+    }
 };
 const theGoodDoctor = {
     tipo: 'serie',
@@ -133,6 +137,10 @@ const theGoodDoctor = {
         iframe: 'https://www.youtube.com/embed/uHSzihtBkEk',
         urlVideo: 'https://www.youtube.com/watch?v=uHSzihtBkEk'
     },
+    imagen:{
+        url: "../images/gooddoctor.jfif",
+        alt: "Poster The Good Doctor"
+    }
 };
 const rickAndMorty = {
     tipo: 'serie',
@@ -196,6 +204,10 @@ const rickAndMorty = {
         iframe: 'https://www.youtube.com/embed/58-gZTQ36LU',
         urlVideo: 'https://www.youtube.com/watch?v=58-gZTQ36LU'
     },
+    imagen:{
+        url: "../images/rickandmorty.jfif",
+        alt: "Poster Rick and Morty"
+    }
 };
 const tlou = {
     tipo: 'serie',
@@ -239,6 +251,10 @@ const tlou = {
         iframe: 'https://www.youtube.com/embed/yyGetSp7CIc',
         urlVideo: 'https://www.youtube.com/watch?v=yyGetSp7CIc'
     },
+       imagen:{
+        url: "../images/thelastofus.jfif",
+        alt: "Poster The Last Of Us"
+    }
 };
 const breakingBad = {
     tipo: 'serie',
@@ -294,6 +310,10 @@ const breakingBad = {
         iframe: 'https://www.youtube.com/embed/HhesaQXLuRY',
         urlVideo: 'https://www.youtube.com/watch?v=HhesaQXLuRY'
     },
+    imagen:{
+        url: "../images/brakingbad.jpg",
+        alt: "Poster de Breaking Bad"
+    }
 };
 const peakyBlinders = {
     tipo: 'serie',
@@ -361,6 +381,10 @@ const peakyBlinders = {
         iframe: 'https://www.youtube.com/embed/oVzVdvGIC7U',
         urlVideo: 'https://www.youtube.com/watch?v=oVzVdvGIC7U'
     },
+    imagen:{
+        url: "../images/peakyBlinders.jpg",
+        alt: "Poster de Los Peaky Blinders"
+    }
 };
 const theOffice = {
     tipo: 'serie',
@@ -431,6 +455,10 @@ const theOffice = {
         iframe: 'https://www.youtube.com/embed/tNcDHWpselE',
         urlVideo: 'https://www.youtube.com/watch?v=tNcDHWpselE'
     },
+    imagen:{
+        url: "../images/theOffice.jpg",
+        alt: "Poster The Office"
+    }
 };
 const sopranos = {
     tipo: 'serie',
@@ -490,6 +518,10 @@ const sopranos = {
         iframe: 'https://www.youtube.com/embed/MkOK-Ecu-Xo',
         urlVideo: 'https://www.youtube.com/watch?v=MkOK-Ecu-Xo'
     },
+    imagen:{
+        url: "../images/soprano.jpg",
+        alt: "Poster Los Sopranos"
+    }
 }
 
 const gladiador = {
@@ -525,6 +557,10 @@ const gladiador = {
         iframe: 'https://www.youtube.com/embed/P5ieIbInFpg',
         urlVideo: 'https://www.youtube.com/watch?v=P5ieIbInFpg'
     },
+    imagen:{
+        url: "../images/gladiador.jpg",
+        alt: "Poster Gladiador"
+    }
 };
 
 const shrek = {
@@ -560,6 +596,10 @@ const shrek = {
         iframe: 'https://www.youtube.com/embed/TMIsxOsuwNA',
         urlVideo: 'https://www.youtube.com/watch?v=TMIsxOsuwNA'
     },
+    imagen:{
+        url: "../images/shrek.jpg",
+        alt: "Poster Shrek"
+    }
 };
 const taxiDriver = {
     tipo: 'pelicula',
@@ -594,6 +634,10 @@ const taxiDriver = {
         iframe: 'https://www.youtube.com/embed/T5IligQP7Fo',
         urlVideo: 'https://www.youtube.com/watch?v=T5IligQP7Fo'
     },
+    imagen:{
+        url: "../images/taxiDriver.jpg",
+        alt: "Poster Taxi Driver"
+    }
 };
 const bastardosSG = {
     tipo: 'pelicula',
@@ -628,6 +672,10 @@ const bastardosSG = {
         iframe: 'https://www.youtube.com/embed/XrDTjOV7kU0',
         urlVideo: 'https://www.youtube.com/watch?v=XrDTjOV7kU0'
     },
+    imagen:{
+        url: "../images/bastardosSinGloria.jpg",
+        alt: "Poster Bastardos Sin Gloria"
+    }
 };
 const nueveReinas = {
     tipo: 'pelicula',
@@ -662,6 +710,10 @@ const nueveReinas = {
         iframe: 'https://www.youtube.com/embed/I42JYVjQkPI',
         urlVideo: 'https://www.youtube.com/watch?v=I42JYVjQkPI'
     },
+    imagen:{
+        url: "../images/nuevereinas.jpg",
+        alt: "Poster Nueve Reinas"
+    }
 };
 const megalopolis = {
     tipo: 'pelicula',
@@ -696,6 +748,10 @@ const megalopolis = {
         iframe: 'https://www.youtube.com/embed/5YxpnOjYJQM',
         urlVideo: 'https://www.youtube.com/watch?v=5YxpnOjYJQM'
     },
+    imagen:{
+        url: "../images/megalopolis.jpg",
+        alt: "Poster Megalopolis"
+    }
 };
 const elPadrino = {
     tipo: 'pelicula',
@@ -730,6 +786,10 @@ const elPadrino = {
         iframe: 'https://www.youtube.com/embed/iOyQx7MXaz0',
         urlVideo: 'https://www.youtube.com/watch?v=iOyQx7MXaz0'
     },
+    imagen:{
+        url: "../images/elPadrino.jpeg",
+        alt: "Poster El Padrino"
+    }
 };
 const theBigShort = {
     tipo: 'pelicula',
@@ -764,6 +824,10 @@ const theBigShort = {
         iframe: 'https://www.youtube.com/embed/rDlYm15ztK4',
         urlVideo: 'https://www.youtube.com/watch?v=rDlYm15ztK4'
     },
+    imagen:{
+        url: "../images/theBigShort.png",
+        alt: "Poster The Big Short"
+    }
 };
 const SERIES_Y_PELICULAS_A_GUARDAR = [howIMeetYourMother, theGoodDoctor, rickAndMorty, tlou, breakingBad, peakyBlinders, theOffice, sopranos, gladiador, shrek, taxiDriver, bastardosSG, nueveReinas, megalopolis, elPadrino, theBigShort
 ]

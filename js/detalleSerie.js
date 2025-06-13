@@ -1,8 +1,8 @@
 const SERIES_Y_PELICULAS = JSON.parse(localStorage.getItem("seriesYPeliculas"));
 const urlParams = new URLSearchParams(window.location.search);
 const id = urlParams.get("id");
-const serie = SERIES_Y_PELICULAS.find(p => p.id == id);
-
+const objetoVisual = SERIES_Y_PELICULAS.find(p => p.id == id);
+//objeto visual es un objeto donde se guarda el objeto buscado por el id en la url
 
 
 function agregarIframe() {
@@ -12,8 +12,8 @@ function agregarIframe() {
     botonVerElement.innerHTML = "Comenzar";
     botonVerElement.className = "boton_ver";
     botonVerElement.target = "_blank";
-    botonVerElement.href = serie.video.urlVideo;
-    iframeElement.src = serie.video.iframe;
+    botonVerElement.href = objetoVisual.video.urlVideo;
+    iframeElement.src = objetoVisual.video.iframe;
     nodeElement.appendChild(iframeElement);
     nodeElement.appendChild(botonVerElement);
 }
@@ -21,7 +21,7 @@ function agregarIframe() {
 function agregarTitulo() {
     const nodeElement = document.querySelector(".detalle_pelicula");
     const tituloElement = document.createElement("p");
-    tituloElement.innerHTML = `<strong>Título:</strong> ${serie.nombre}`;
+    tituloElement.innerHTML = `<strong>Título:</strong> ${objetoVisual.nombre}`;
     nodeElement.appendChild(tituloElement);
 };
 
@@ -122,7 +122,7 @@ function agregarSinopsis(arrayDePeliculasYSeries){
 
 
 agregarIframe();
-agregarTemporadasODuracion(serie);
-agregarGenero(serie);
-agregarActores(serie);
-agregarSinopsis(serie);
+agregarTemporadasODuracion(objetoVisual);
+agregarGenero(objetoVisual);
+agregarActores(objetoVisual);
+agregarSinopsis(objetoVisual);

@@ -4,11 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/detalles-Styles.css">
+    <title>Series</title>
+    <link rel="stylesheet" href="../css/seriesStyles.css">
     <link rel="stylesheet" href="../css/headerStyles.css">
     <link rel="stylesheet" href="../css/footerStyles.css">
     <link href="../images/icon.png" rel="shortcut icon">
-    <title>Detalle_Serie</title>
 </head>
 
 <body>
@@ -16,7 +16,7 @@
         <nav class="header_nav">
 
 
-            <a href="pantalla-principal.html">
+            <a href="../paginas/pantalla-principal.html">
                 <svg class="icon-header" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24"
                     width="24px" fill="black">
                     <path d="M0 0h24v24H0z" fill="none" />
@@ -25,7 +25,7 @@
                 Home
 
             </a>
-            <a href="serie.html">
+            <a href="../paginas/serie.html">
                 <svg class="icon-header" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24"
                     width="24px" fill="black">
                     <path d="M0 0h24v24H0z" fill="none" />
@@ -37,7 +37,7 @@
 
 
             </a>
-            <a href="pelicula.html">
+            <a href="../paginas/pelicula.html">
                 <svg class="icon-header" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24"
                     width="24px" fill="black">
                     <path d="M0 0h24v24H0z" fill="none" />
@@ -45,7 +45,7 @@
                         d="M18 3v2h-2V3H8v2H6V3H4v18h2v-2h2v2h8v-2h2v2h2V3h-2zM8 17H6v-2h2v2zm0-4H6v-2h2v2zm0-4H6V7h2v2zm10 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V7h2v2z" />
                 </svg>
                 Peliculas</a>
-            <a href="perfil.html">
+            <a href="../paginas/perfil.html">
                 <svg class="icon-header" xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24"
                     height="24px" viewBox="0 0 24 24" width="24px" fill="black">
                     <g>
@@ -60,58 +60,37 @@
 
         </nav>
     </header>
-    <main class="main_detalle">
-        <section class="seccion_informacion">
-            <div class="contenedor">
-                <div class="detalle_contenido">
-
-                    <div class="video_detalle">
-            
-                    </div>
-                    <div class="detalle_pelicula">
+    <main class="main">
+        <section class="seccion-filtros">
+            <form method="get">
+                <div class="filtro-categoria">
+                    <label for="categoria">Categorias</label>
+                    <select class="categoria" name="categoria" id="categoria">
+                        <option value="" selected disabled>Seleccione una categoría</option>
+                        <option value="accion">Accion</option>
+                        <option value="drama">Drama</option>
+                        <option value="humor">Humor</option>
+                        <option value="terror">Terror</option>
+                    </select>
                 </div>
-
-            </div>
-            <div class="similares">
-                <h3>Similares</h3>
-                <div class="peliculas_series_similares">
-                    <a href="serie-pelicula.html?id=gladiador">
-                        <img src="../images/gladiador.jpg" alt="Gladiador" />
-                    </a>
-                    <a href="serie-pelicula.html?id=shrek">
-                        <img src="../images/shrek.jpg" alt="Shrek" />
-                    </a>
-                    <a href="serie-pelicula.html?id=taxiDriver">
-                        <img src="../images/taxidriver.jpg" alt="Taxi Driver" />
-                    </a>
-                    <a href="serie-pelicula.html?id=breakingBad">
-                        <img src="../images/brakingbad.jpg" alt="Breaking Bad" />
-                    </a>
-                    <a href="serie-pelicula.html?id=theGoodDoctor">
-                        <img src="../images/gooddoctor.jfif" alt="Good Doctor" />
-                    </a>
-                    <a href="serie-pelicula.html?id=howIMeetYourMother">
-                        <img src="../images/howimet.jfif" alt="How I Met Your Mother" />
-                    </a>
-                    <a href="serie-pelicula.html?id=rickAndMorty">
-                        <img src="../images/rickandmorty.jfif" alt="Rick and Morty" />
-                    </a>
-                    <a href="serie-pelicula.html?id=bastardosSG">
-                        <img src="../images/bastardosSinGloria.jpg" alt="Bastardos sin Gloria" />
-                    </a>
-                    <a href="serie-pelicula.html?id=nueveReinas">
-                        <img src="../images/nuevereinas.jpg" alt="Nueve Reinas" />
-                    </a>
-                    <a href="serie-pelicula.html?id=theOffice">
-                        <img src="../images/theoffice.jpg" alt="The Office" />
-                    </a>
-                    <a href="serie-pelicula.html?id=sopranos">
-                        <img src="../images/soprano.jpg" alt="The Sopranos" />
-                    </a>
-                    <a href="serie-pelicula.html?id=megalopolis" class="tarjeta-contenido">
-                        <img src="../images/megalopolis.jpg" alt="Megalopolis">
-                    </a>
+                <div>
+                    <svg class="icon-filtro" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24"
+                        width="24px" fill="black">
+                        <path d="M0 0h24v24H0z" fill="none" />
+                        <path
+                            d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+                    </svg>
+                    <input class="buscar" type="search" id="buscar" name="buscar" placeholder="Buscar por nombre">
                 </div>
+            </form>
+        </section>
+
+
+
+        <section class="contenido">
+
+            <div class="grilla-contenido">
+
             </div>
         </section>
     </main>
@@ -126,7 +105,8 @@
             <p>© GRUPO 2</p>
         </div>
     </footer>
-    <script src="../js/detalleSerie.js"></script>
+    <script src="../js/dinamicaPantallaPrincipal.js"></script>
 </body>
+
 
 </html>
