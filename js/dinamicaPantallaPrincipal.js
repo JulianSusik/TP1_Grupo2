@@ -25,10 +25,10 @@ function mostrarPeliculasOSeriesSegunRuta(arrayDePeliculasYSeries, rutaActual){
 }
 
 console.log(rutaActual);
-if (rutaActual.includes("serie.html")) {
+if (rutaActual.includes("serie")) {
     mostrarPeliculasOSeriesSegunRuta(SERIES_Y_PELICULAS, "serie"); //Si es serie pasamos el array y la palabra serie para ruta actual
-} else if (rutaActual.includes("pelicula.html")) {
+} else if (rutaActual.includes("pelicula")) {
     mostrarPeliculasOSeriesSegunRuta(SERIES_Y_PELICULAS, "pelicula"); //Si es serie pasamos el array la palabra pelicula para ruta actual
-} else if (rutaActual.includes("pantalla-principal.html")) {
+} else if (rutaActual.includes("pantalla-principal")) {
     mostrarPeliculasYSeries(SERIES_Y_PELICULAS); //Si no es solo pelicula o solo serie mostramos todo
 }
