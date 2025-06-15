@@ -78,18 +78,75 @@ body {
 
 
 .similares {
-    padding: 1em;
-    border-radius: 0.375em;
-    margin-top: 1.9em;
+    padding: 0em 1em 0em 1em;
+    margin-top: 1em;
+    box-sizing: border-box;
     color: rgb(0, 0, 0);
+    height: 75vh;
 }
 
 .similares h3 {
-    margin-bottom: 0.6em;
+    margin-bottom: 0.4em;
     font-weight: bold;
     border-bottom: 2px solid white;
     padding-bottom: 0.5em;
 }
+
+
+#contenedor-carrusel{
+    margin: 0;
+    width: 100%;
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+    align-content: center;
+    flex-direction: row;
+}
+
+ /* #carrusel {
+    width: 25%;
+    height: 100%;
+  }
+
+  .slide {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .slide img{
+    width: 100%;
+    height: 100%;
+  }*/
+
+  #carrusel {
+  position: relative; /*Establece en un mismo lugar*/
+  width: 25%;
+  height: 100%;
+  overflow: hidden; /*Oculta los div*/
+}
+
+.slide {
+  position: absolute; /* Apila en un mismo lugar */
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+}
+.slide.activo {
+  opacity: 1;/*ACtualiza la opacidad para que se vea el elemento activo*/
+}
+
 
 .peliculas_series_similares {
     display: flex;
