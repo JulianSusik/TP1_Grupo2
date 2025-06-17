@@ -232,6 +232,73 @@ document.querySelector(".primary__main__form").addEventListener("submit", functi
   }
 
 }); 
+
+document.querySelector("#buttonConfirm").addEventListener("click", function(){
+//vuelvo a poner las validaciones para q no guarde cosas vacias o con errores
+   validarSoloLetras("nombre", "error-nombre");
+  validarSoloLetras("apellido", "error-apellido");
+  validarEmail("correo", "error-email");
+  validarSoloNumerosYLetras("usuario", "error-usuario");
+  validarContrasenia("contrasenia", "error-contrasenia");
+  validarConfirmarContrasenia("contraseniaB", "error-contraseniaB", "contrasenia");
+
+  if (esTarjetaSeleccionada()) {
+    validarNumeroTarjeta("numeroTarjeta", "error-numeroTarjeta");
+    validarCodTarjeta("codTarjeta", "error-codTarjeta");
+  } else {
+    document.getElementById("error-numeroTarjeta").innerHTML = "";
+    document.getElementById("error-codTarjeta").innerHTML = "";
+  }
+  let errores = document.querySelectorAll("p.mensaje-error");// verificamos que no haya errores
+  let hayErrores = false;
+  errores.forEach(function (p) {
+    if (p.innerText.trim() !== "") {
+      hayErrores = true;
+    }
+  });
+  if (hayErrores) {
+    alert("No se pueden guardar los datos. Hay errores en el formulario.");
+    return;
+  }
+  let nombreUsuarioNuevo = document.querySelector("#nombre").value;
+  let apellidoUsuarioNuevo = document.querySelector("#apellido").value;    
+  let correoUsuarioNuevo = document.querySelector("#correo").value;       
+  let nombreDeUsuarioUsuarioNuevo = document.querySelector("#usuario").value; 
+  let contraseniaUsuarioNuevo = document.querySelector("#contrasenia").value; 
+
+  
+
+  let nuevoUsuario = {
+    nombre: nombreUsuarioNuevo,
+    apellido: apellidoUsuarioNuevo,
+    correo: correoUsuarioNuevo,
+    usuario: nombreDeUsuarioUsuarioNuevo,
+    contrasenia: contraseniaUsuarioNuevo
+  };
+
+  let usuarioGuardados = localStorage.getItem("usuarios");
+  let usuarios;
+  if (usuarioGuardados != null){
+    usuarios = JSON.parse(usuarioGuardados);
+  } else{
+    usuarios = [];
+  }
+  // el metodo .some devuelve true si se cumple al menos una condicio
+  let usuarioExistente = usuarios.some(function(usuario) { 
+    return usuario.usuario === nuevoUsuario.usuario || usuario.correo === nuevoUsuario.correo; //verificamos que no se repita usuario o mail
+  });
+  if (usuarioExistente) {
+    alert("El nombre de usuario o el correo ya están registrados.");
+    return;
+  }
+
+
+  usuarios.push(nuevoUsuario);
+  localStorage.setItem("usuarios", JSON.stringify(usuarios));
+
+  alert("Usuario registrado con éxito");
+ 
+});
 /*
    window.addEventListener("DOMContentLoaded", function () {
      actualizarEstadoBoton();
