@@ -1,5 +1,5 @@
 body {
-  background-color: #c9c6ff;
+  background-color: #262643;
 }
 
 .main {
@@ -15,7 +15,6 @@ form {
   align-items: center;
   justify-content: space-between;
   padding: 1rem 1.25rem;
-  background-color: #c9c6ff;
 
 }
 
@@ -27,7 +26,7 @@ form {
 
 .seccion-filtros label {
   font-size: 1.2rem;
-  color: #333;
+  color: #a59de9;
   margin: 0;
 }
 
@@ -76,7 +75,7 @@ div {
 
 .contenido {
   padding: 0.5rem;
-  max-width: 80%;
+  max-width: 88%;
   margin: 0 auto;
 }
 
@@ -84,31 +83,39 @@ div {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(2, 1fr);
-  gap: 0.5rem;
-  margin-top: 0.5rem;
+  gap: 0.8rem;
 }
 
 .tarjeta-contenido {
   display: block;
-
-
   cursor: pointer;
-  background-color: white;
+  background-color: #605c93;
   text-decoration: none;
 }
 
 
 .tarjeta-contenido img {
   width: 100%;
-  height: 12.5rem;
+  aspect-ratio: 2 / 3;
   object-fit: cover;
   object-position: center;
   display: block;
   transition: transform 0.3s ease;
 }
 
+.titulo-tarjeta{
+  display: flex;
+  justify-content: center;      
+  align-items: center;          
+  text-align: center;
+  height: 2.5em;                
+  padding: 0 0.5em;  
+  text-decoration: none;
+  color: #ecd5ed;
+}
+
 .tarjeta-contenido:hover img {
-  transform: scale(1.1);
+  transform: scale(0.9);
 }
 
 @media (max-width: 768px) {

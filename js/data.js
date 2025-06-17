@@ -64,7 +64,7 @@ const theGoodDoctor = {
         urlVideo: 'https://www.youtube.com/watch?v=uHSzihtBkEk'
     },
     imagen: {
-        url: "../images/gooddoctor.jfif",
+        url: "../images/gooddoctor.jpg",
         alt: "Poster The Good Doctor"
     }
 };
@@ -138,7 +138,7 @@ const howIMeetYourMother = {
         urlVideo: 'https://www.youtube.com/watch?v=lDM-i_7PwhU'
     },
     imagen: {
-        url: "../images/howimet.jfif",
+        url: "../images/howimet.jpg",
         alt: "Poster How I Met Your Mother"
     }
 };
@@ -1054,55 +1054,6 @@ const haunting =  {
     }
 };
 
-const from = {
-    tipo: 'serie',
-    id: 'from',
-    nombre: 'From',
-    temporadas: [
-        {
-            numero: 1,
-            capitulos: 10,
-        },{
-            numero: 2,
-            capitulos: 10
-        },{
-            numero: 3,
-            capitulos: 10
-        }
-    ],
-    genero: 'Terror',
-    actores: [
-        {
-            actor: 'Harold Perrineau',
-            wiki: 'https://es.wikipedia.org/wiki/Harold_Perrineau',
-        },
-        {
-            actor: 'Catalina Sandino Moreno',
-            wiki: 'https://es.wikipedia.org/wiki/Catalina_Sandino_Moreno',
-        },
-        {
-            actor: 'Eion Bailey',
-            wiki: 'hhttps://es.wikipedia.org/wiki/Eion_Bailey',
-        },
-        {
-            actor: 'David Alpay',
-            wiki: 'https://es.wikipedia.org/wiki/David_Alpay',
-        },
-        {
-            actor: 'Elizabeth Saunders',
-            wiki: 'https://es.wikipedia.org/wiki/Kate_Siegel',
-        }
-    ],
-    sinopsis: 'La serie "From" trata sobre un pueblo misterioso en el centro de Estados Unidos que atrapa a cualquiera que entra. Los residentes deben luchar por sobrevivir y encontrar una salida, enfrentándose a amenazas del bosque circundante y criaturas aterradoras que emergen por la noche. La serie explora el misterio del pueblo y las luchas de sus habitantes para mantener la esperanza y la cordura mientras buscan una forma de escapar. ',
-    video: {
-        iframe: 'https://www.youtube.com/embed/msFhTsJNHVA',
-        urlVideo: 'https://www.youtube.com/watch?v=msFhTsJNHVA'
-    },
-    imagen: {
-        url: "../images/from.avif",
-        alt: "Poster From"
-    }
-};
 
 const hannibal = {
     tipo: 'serie',
@@ -1154,7 +1105,7 @@ const hannibal = {
     }
 };
 
-const SERIES_Y_PELICULAS_A_GUARDAR = [howIMeetYourMother, theGoodDoctor, rickAndMorty, tlou, breakingBad, peakyBlinders, theOffice, gladiador, shrek, taxiDriver, bastardosSG, nueveReinas, megalopolis, elPadrino, theBigShort, eternauta, umbrella, ironman, capitanAmerica, elConjuro, actividadParanormal, it, haunting, from, hannibal
+const SERIES_Y_PELICULAS_A_GUARDAR = [howIMeetYourMother, theGoodDoctor, rickAndMorty, tlou, breakingBad, peakyBlinders, theOffice, gladiador, shrek, taxiDriver, bastardosSG, nueveReinas, megalopolis, elPadrino, theBigShort, eternauta, umbrella, ironman, capitanAmerica, elConjuro, actividadParanormal, it, haunting, hannibal
 ]
 
 localStorage.setItem(LOCAL_STORAGE_SERIES_PELICULAS, JSON.stringify(SERIES_Y_PELICULAS_A_GUARDAR)); 
