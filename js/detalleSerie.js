@@ -3,7 +3,7 @@ const urlParams = new URLSearchParams(window.location.search);
 const id = urlParams.get("id");
 const objetoVisual = SERIES_Y_PELICULAS.find(p => p.id == id);
 //objeto visual es un objeto donde se guarda el objeto buscado por el id en la url
-
+console.log(objetoVisual);
 
 function agregarIframe() {
     const nodeElement = document.querySelector(".video_detalle");//Contenedor del iframe
@@ -119,84 +119,51 @@ function agregarSinopsis(arrayDePeliculasYSeries) {
     sinopsisElement.innerHTML = `<strong>Sinopsis: </strong>${arrayDePeliculasYSeries.sinopsis}`;
     nodeElement.appendChild(sinopsisElement);
 }
-/*
-document.addEventListener("DOMContentLoaded", function () {//Esto hace que cuando se carge por completo el html se ejecute la funcion del parametro
-    const carruselElement = document.getElementById("carrusel");
-    let index = 0;
-    carruselELement.innerHTML = "";
-    function renderCarrusel() {
 
-
-
-        SERIES_Y_PELICULAS.forEach((serieOPelicula, i) => {
-            const slideCarrusel = document.createElement("div");
-            slideCarrusel.classList.add("slide");
-            if (i === index) {
-                const imagenCarrusel = document.createElement("img");
-                imagenCarrusel.src = SERIES_Y_PELICULAS[index].imagen.url;
-                imagenCarrusel.alt = SERIES_Y_PELICULAS[index].imagen.alt;
-                slideCarrusel.appendChild(imagenCarrusel);
-                carruselElement.appendChild(slideCarrusel);
-            }
-        });
-        
-    }
-
-    function mostrarSiguiente() {
-        index = (index + 1) % SERIES_Y_PELICULAS.length;
-        renderCarrusel();
-    }
-    function mostrarAnterior() {
-        index = (index - 1 + SERIES_Y_PELICULAS.length) % SERIES_Y_PELICULAS.length;
-        renderCarrusel();
-    }
-
-    document.getElementById("prev").addEventListener("click", mostrarAnterior);
-    document.getElementById("next").addEventListener("click", mostrarSiguiente);
-
-
-
-});
-*/
 document.addEventListener("DOMContentLoaded", function () {
     const carruselElement = document.getElementById("carrusel");
     let index = 0;
-    
-    // Cargar todos los slides al iniciar
-    SERIES_Y_PELICULAS.forEach((serieOPelicula, i) => {
+
+    // Crea todos los elementos div pero sin contenido
+    SERIES_Y_PELICULAS.forEach(() => {
         const slideCarrusel = document.createElement("div");
         slideCarrusel.classList.add("slide");
-        if (i == 0) {
-            slideCarrusel.classList.add("activo");
-        }
-        const imagenElement = document.createElement("img");
-        imagenElement.src = serieOPelicula.imagen.url;
-        imagenElement.alt = serieOPelicula.imagen.alt;
-        slideCarrusel.appendChild(imagenElement);
-        carruselElement.appendChild(slideCarrusel); //Cargamos todas las imagenes en los div una sobre otra pero con opacidad 0
-        //Menos la primera, entonces la unica que tiene opacidad 1 es la que se esta mostrando
+        carruselElement.appendChild(slideCarrusel);
     });
-    
-    const slides = document.querySelectorAll(".slide");//Llamamos a todos los elementos .slide para modificarlos segun el for each indique
+
+    const slides = document.querySelectorAll(".slide");//Seleccionamos todos los div vacios
+
     function actualizarCarrusel() {
-        slides.forEach((slide, i) => {
-            slide.classList.toggle("activo", i === index); //Cuando el foreach este posicionado en la imagen i, se cambia a este div como activo
-            //Entonces se le saca la opacidad y se muestra con la transicion
+        slides.forEach((slide, i) => {//Itera sobre todos los slide
+            slide.classList.remove("activo");//Remueve la clase activo
+            slide.innerHTML = ""; // Limpiamos el contenido anterior
+            if (i === index) { //Cuando el for sea el mismo que el del index
+                slide.classList.add("activo");
+                const linkElement = document.createElement("a");
+                linkElement.href = `serie-pelicula.html?id=${SERIES_Y_PELICULAS[index].id}`;
+                const imagenElement = document.createElement("img");
+                imagenElement.src = SERIES_Y_PELICULAS[index].imagen.url;
+                imagenElement.alt = SERIES_Y_PELICULAS[index].imagen.alt;
+                linkElement.appendChild(imagenElement);
+                slide.appendChild(linkElement);
+            }
         });
     }
 
     function mostrarSiguiente() {
-        index = (index + 1) % SERIES_Y_PELICULAS.length;
+        index = (index + 1) % SERIES_Y_PELICULAS.length; //Cada click en el siguiente aumenta el index
         actualizarCarrusel();
     }
 
     function mostrarAnterior() {
-        index = (index - 1 + SERIES_Y_PELICULAS.length) % SERIES_Y_PELICULAS.length;
+        index = (index - 1 + SERIES_Y_PELICULAS.length) % SERIES_Y_PELICULAS.length; //Cada click en anterior resta el index
         actualizarCarrusel();
     }
 
     document.getElementById("prev").addEventListener("click", mostrarAnterior);
     document.getElementById("next").addEventListener("click", mostrarSiguiente);
+
+    actualizarCarrusel(); // Mostrar la primera imagen al cargar
 });
 
 

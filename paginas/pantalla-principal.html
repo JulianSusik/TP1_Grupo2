@@ -61,18 +61,16 @@
         </nav>
     </header>
     <main class="main">
-        <section class="section__button--cerrarSesion">
-            <a class="btn btn2" href="../index.html">Cerrar Sesion</a>
-        </section>
         <section class="seccion-filtros">
+            
             <form method="get">
                 <div class="filtro-categoria">
                     <label for="categoria">Categorias</label>
                     <select class="categoria" name="categoria" id="categoria">
-                        <option value="" selected disabled>Seleccione una categoría</option>
+                        <option value="" >Seleccione una categoría</option>
                         <option value="accion">Accion</option>
                         <option value="drama">Drama</option>
-                        <option value="humor">Humor</option>
+                        <option value="comedia">Comedia</option>
                         <option value="terror">Terror</option>
                     </select>
                 </div>
@@ -83,7 +81,7 @@
                         <path
                             d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
                     </svg>
-                    <input class="buscar" type="search" id="buscar" name="buscar" placeholder="Buscar por nombre">
+                    <input class="buscar" type="text" id="buscador" name="buscador" placeholder="Buscar por nombre">
                 </div>
             </form>
         </section>

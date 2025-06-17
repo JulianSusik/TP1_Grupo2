@@ -316,5 +316,32 @@ function actualizarEstadoBoton() {
 
   document.getElementById("buttonConfirm").disabled = hayErrores;
 }
-
 */
+document.querySelector("#buttonConfirm").addEventListener("click", function(){
+  let nombreUsuarioNuevo = document.querySelector("#nombre").value;
+  let apellidoUsuarioNuevo = document.querySelector("#nombre").value;
+  let correoUsuarioNuevo = document.querySelector("#nombre").value;
+  let nombreDeUsuarioUsuarioNuevo = document.querySelector("#nombre").value;
+  let contraseniaUsuarioNuevo = document.querySelector("#nombre").value;
+
+  let nuevoUsuario = {
+    nombre: nombreUsuarioNuevo,
+    apellido: apellidoUsuarioNuevo,
+    correo: correoUsuarioNuevo,
+    usuario: nombreDeUsuarioUsuarioNuevo,
+    contrasenia: contraseniaUsuarioNuevo
+  };
+
+  let usuarioGuardados = localStorage.getItem("usuarios");
+  let usuarios;
+  if (usuarioGuardados != null){
+    usuarios = JSON.parse(usuarioGuardados);
+  } else{
+    usuarios = [];
+  }
+  usuarios.push(nuevoUsuario);
+  localStorage.setItem("usuarios", JSON.stringify(usuarios));
+
+
+
+})

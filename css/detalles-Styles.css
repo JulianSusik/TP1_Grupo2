@@ -1,10 +1,10 @@
 .main_detalle {
-    color: #1f2937;
+    color: #a59de9;
     margin-top: 0.6em;
 }
 
 body {
-    background-color: #c9c6ff;
+    background-color: #262643;
 }
 
 .contenedor {
@@ -59,41 +59,42 @@ body {
     flex: 2;
     line-height: 1.4em;
 }
-.linkActores{
-    color: #1f2937;
+
+.linkActores {
+    color: #a59de9;
 }
-.linkActores:hover{
+
+.linkActores:hover {
     text-decoration: underline;
 }
+
 .detalle_pelicula p {
     margin: 0.375em 0;
 }
 
-.temporadaYCapitulos{
+.temporadaYCapitulos {
     display: flex;
     flex-direction: row;
     gap: 1em;
 }
 
-
-
 .similares {
     padding: 0em 1em 0em 1em;
     margin-top: 1em;
     box-sizing: border-box;
-    color: rgb(0, 0, 0);
+    color: #ecd5ed;
     height: 75vh;
 }
 
 .similares h3 {
     margin-bottom: 0.4em;
     font-weight: bold;
-    border-bottom: 2px solid white;
+    border-bottom: 2px solid #ecd5ed;
     padding-bottom: 0.5em;
 }
 
 
-#contenedor-carrusel{
+#contenedor-carrusel {
     margin: 0;
     width: 100%;
     height: 90%;
@@ -104,81 +105,53 @@ body {
     flex-direction: row;
 }
 
- /* #carrusel {
-    width: 25%;
-    height: 100%;
-  }
+button#prev,
+button#next {
+    font-size: 2.5rem;
+    border: none;
+    background-color: transparent;
+    color: white;
+    cursor: pointer;
+}
 
-  .slide {
+#carrusel {
+    position: relative;
+    /*Establece en un mismo lugar*/
     width: 100%;
+    max-width: 18.75rem;
     height: 100%;
-    display: flex;
-    justify-content: center;
-  }
-
-  .slide img{
-    width: 100%;
-    height: 100%;
-  }*/
-
-  #carrusel {
-  position: relative; /*Establece en un mismo lugar*/
-  width: 25%;
-  height: 100%;
-  overflow: hidden; /*Oculta los div*/
+    overflow: hidden;
+    /*Oculta los div*/
 }
 
 .slide {
-  position: absolute; /* Apila en un mismo lugar */
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  transition: opacity 1s ease-in-out;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    position: absolute;
+    /* Apila en un mismo lugar */
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .slide img {
-  width: 100%;
-  height: 100%;
-}
-.slide.activo {
-  opacity: 1;/*ACtualiza la opacidad para que se vea el elemento activo*/
-}
-
-
-.peliculas_series_similares {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1em;
-    justify-content: flex-start;
-}
-
-.peliculas_series_similares a {
-    display: block;
-    width: calc((100% / 4) - 0.8em);
-}
-
-.peliculas_series_similares a img {
     width: 100%;
-    height: 31.25em;
-    border-radius: 0.375em;
-    cursor: pointer;
-    object-fit: cover;
-    box-shadow: 0 0.125em 0.375em rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s ease;
+    height: 100%;
 }
 
-.peliculas_series_similares a img:hover {
-    transform: scale(1.05);
+.slide.activo {
+    opacity: 1;
+    /*ACtualiza la opacidad para que se vea el elemento activo*/
+    z-index: 1;
 }
 
-@media (max-width: 1100px) {
-    .peliculas_series_similares a {
-        width: calc((100% / 3) - 0.8em);
-    }
+.slide.activo a {
+    width: 100%;
+    height: 100%;
 }
+
 
 @media (max-width: 900px) {
     .detalle_contenido {
@@ -193,16 +166,18 @@ body {
     .boton_ver {
         max-width: 100%;
     }
+    button#prev,
+button#next {
+    font-size: 1.5rem;
+}
 }
 
-@media (max-width: 840px) {
-    .peliculas_series_similares a {
-        width: calc((100% / 2) - 0.8em);
+@media (max-width: 375px) {
+    .similares {
+        height: 60vh;
     }
+    button#prev,
+button#next {
+    font-size: 1rem;
 }
-
-@media (max-width: 540px) {
-    .peliculas_series_similares a {
-        width: calc((100% / 1) - 0.8em);
-    }
 }
