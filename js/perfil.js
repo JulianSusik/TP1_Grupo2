@@ -39,16 +39,16 @@ document.querySelector(".form").addEventListener("submit", function (event) {
     } else {
         mensajeError2.innerHTML = "";
     }
-    // usuarioActual.contrasenia = contraseniaNueva;
-    // localStorage.setItem("usuarioActivo", JSON.stringify(usuarioActual));
     if (contraseniaRepetida === contraseniaNueva && contraseniaValida.test(contraseniaNueva)) {
         let usuarios = JSON.parse(localStorage.getItem("usuarios"));
         let usuarioBuscado = usuarios.find(
             (user) => user.usuario === usuarioActual.usuario);
-        usuarioBuscado.contrasenia = contraseniaNueva;
-        localStorage.setItem("usuarios", JSON.stringify(usuarios));
-        usuarioBuscado.contrasenia = contraseniaNueva;
-        localStorage.setItem("usuarios", JSON.stringify(usuarios));
+            usuarioBuscado.contrasenia = contraseniaNueva;
+            localStorage.setItem("usuarios", JSON.stringify(usuarios));
+            usuarioBuscado.contrasenia = contraseniaNueva;
+            localStorage.setItem("usuarios", JSON.stringify(usuarios));
+            usuarioActual.contrasenia = contraseniaNueva;
+            localStorage.setItem("usuarioActivo", JSON.stringify(usuarioActual));
     }
     
 
