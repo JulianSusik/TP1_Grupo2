@@ -54,5 +54,20 @@ document.querySelector(".form").addEventListener("submit", function (event) {
 
 })
 
+//--- eliminar usuario del LocalStorage ---
+function eliminarUsuario (){
+    let usuarios = JSON.parse(localStorage.getItem("usuarios"));
+    let usuarioActual = JSON.parse(localStorage.getItem("usuarioActivo"));
+    let nuevosUsuarios = usuarios.filter(function(user){
+        return user.usuario != usuarioActual.usuario;
+    })
+    localStorage.setItem("usuarios", JSON.stringify(nuevosUsuarios))
+    localStorage.removeItem("usuarioActivo")
+}
+
+
+document.querySelector(".boton-cancelar-js").addEventListener("click", function(){
+    eliminarUsuario ();
+})
 
 
