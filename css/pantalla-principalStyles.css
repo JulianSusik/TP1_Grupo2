@@ -11,7 +11,19 @@ body {
   background-color: lightgrey;
 }
 
+.corazon {
+  display: flex;
+  justify-content: center;
+  font-size: 24px;
+  color: gray;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  margin-left: 8px;
+}
 
+.corazon.favorito {
+  color: hotpink;
+}
 .section__button--cerrarSesion a:hover {
   background-color: rgb(218, 69, 69);
   border-radius: 1.5em;

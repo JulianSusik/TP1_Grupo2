@@ -7,107 +7,101 @@ const busquedaNombre = document.getElementById("buscador")
 function mostrarPeliculasYSeries(arrayDePeliculasYSeries) {
     const nodoElement = document.querySelector(".grilla-contenido");
     nodoElement.innerHTML = "";
-    arrayDePeliculasYSeries.forEach(seriesYPeliculas => {
-        const contenidoElement = document.createElement("a");
-        const tituloElement = document.createElement("h4");
-        tituloElement.innerHTML = `${seriesYPeliculas.nombre}`;
-        tituloElement.className = "titulo-tarjeta";
-        contenidoElement.href = `./serie-pelicula.html?id=${seriesYPeliculas.id}`;
-        contenidoElement.className = "tarjeta-contenido";
-        const imagenElement = document.createElement("img");
-        imagenElement.src = seriesYPeliculas.imagen.url;
-        imagenElement.alt = seriesYPeliculas.imagen.alt;
-        contenidoElement.appendChild(imagenElement);
-        contenidoElement.appendChild(tituloElement);
-        nodoElement.appendChild(contenidoElement);
-    });//Esta funcion crea todas las peliculas y series dinamicas en el html principal
-    //Recorriendo todo el array de objetos y por cada objeto crea su a con img
-}
-/*
-function mostrarPeliculasYSeries(arrayDePeliculasYSeries) {
-    const nodoElement = document.querySelector(".grilla-contenido");
-    nodoElement.innerHTML = "";
 
-    const usuarioActivo = JSON.parse(localStorage.getItem("usuarioActivo"));
-    const todosLosUsuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+    const usuarioActivo = JSON.parse(localStorage.getItem("usuarioActivo"));//Traemos al usuario activo
+    const todosLosUsuarios = JSON.parse(localStorage.getItem("usuarios")) || [];//Traemos TODOS LOS USUARIOS REGISTRADOS
 
-    let favoritos = [];
+    let favoritosPeliculas = [];//Creamos un array de peliculas favoritas que iremos modificando
+    let favoritosSeries = [];//Creamos un array de series favoritas que iremos modificando
 
-    if (usuarioActivo) {
-        const usuarioData = todosLosUsuarios.find(u => u.usuario === usuarioActivo.usuario);
-        if (usuarioData && Array.isArray(usuarioData.favoritos)) {
-            favoritos = usuarioData.favoritos;
+    if (usuarioActivo) {//verifica que haya un usuario activo (que no sea null o undefined)
+        const usuarioData = todosLosUsuarios.find(usuarios => usuarios.usuario === usuarioActivo.usuario);//Busca el usuario que este activo en la sesion
+        if (usuarioData && usuarioData.favoritos) {//Si los usuarios ya tienen guardadas peliculas favoritas se guardan en las variables
+            favoritosPeliculas = usuarioData.favoritos.peliculas || []; //Estos let
+            favoritosSeries = usuarioData.favoritos.series || []; //Estos let
         }
     }
 
     arrayDePeliculasYSeries.forEach(item => {
-        const contenidoElement = document.createElement("a");
-        contenidoElement.className = "tarjeta-contenido";
-        contenidoElement.href = `./serie-pelicula.html?id=${item.id}`;
+        const tarjeta = document.createElement("div");
+        tarjeta.className = "tarjeta-contenido";
 
-        const imagenElement = document.createElement("img");
-        imagenElement.src = item.imagen.url;
-        imagenElement.alt = item.imagen.alt;
+        const link = document.createElement("a");
+        link.href = `./serie-pelicula.html?id=${item.id}`;
 
-        const tituloElement = document.createElement("h4");
-        tituloElement.className = "titulo-tarjeta";
-        tituloElement.textContent = item.nombre;
+        const imagen = document.createElement("img");
+        imagen.src = item.imagen.url;
+        imagen.alt = item.imagen.alt;
 
+        const titulo = document.createElement("h4");
+        titulo.className = "titulo-tarjeta";
+        titulo.textContent = item.nombre;
+
+        //Creamos el corazon dentro de un span
         const corazon = document.createElement("span");
         corazon.classList.add("corazon");
-        corazon.dataset.id = item.nombre;  // Usás el nombre como ID único
+        corazon.dataset.id = item.id; //Le indicamos el id de la serie/pelicula
+        corazon.dataset.tipo = item.tipo;//Le indicamos el tipo (Serie o pelicula)
         corazon.innerHTML = "❤";
 
-        // ✅ Si ya es favorito, marcarlo
-        if (favoritos.includes(item.nombre)) {
+        //El ternario devuelve true o false si el array de favoritos por cada serie o pelicula, tiene dentro el id de la P/S
+        //En caso de que la id este devuelve true, si no devuelve false
+        //                 Si es igual a pelicula      Corrobora si la id esta dentro         Corrobora si la id esta dentro
+        const esFavorito = item.tipo === "pelicula" ? favoritosPeliculas.includes(item.id) : favoritosSeries.includes(item.id);
+
+        if (esFavorito) {//Si es favorito agrega la clase
             corazon.classList.add("favorito");
         }
 
-        // Añadir elementos al DOM
-        contenidoElement.appendChild(imagenElement);
-        contenidoElement.appendChild(tituloElement);
-        contenidoElement.appendChild(corazon);
-        nodoElement.appendChild(contenidoElement);
+        link.appendChild(imagen);
+        link.appendChild(titulo);
+        tarjeta.appendChild(link);
+        tarjeta.appendChild(corazon);
+        nodoElement.appendChild(tarjeta);
     });
 }
 
-document.addEventListener("click", (e) => {
-    if (e.target.classList.contains("corazon")) {
-        e.preventDefault(); // Evita que el enlace se ejecute
-        e.stopPropagation(); // Evita que el evento burbujee al <a>
+document.addEventListener("click", (cora) => {//Esto se ejecuta cuando haya un click
+    if (cora.target.classList.contains("corazon")) {//Esto verifica si el elemento donde se hizo el click contiene corazon
+        cora.preventDefault();//Hace que no se ejecute la etiqueta <a> de la tarjeta
+        cora.stopPropagation();////Hace que no se ejecute la etiqueta <a> de la tarjeta
 
-        const id = e.target.dataset.id;
-        const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
-        const usuarioActivo = JSON.parse(localStorage.getItem("usuarioActivo"));
+        const id = cora.target.dataset.id;
+        const tipo = cora.target.dataset.tipo;
+
+        const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];//Trae todos los usuarios
+        const usuarioActivo = JSON.parse(localStorage.getItem("usuarioActivo"));//Trae al usuario logueado
 
         if (!usuarioActivo) {
             alert("Inicia sesión para guardar favoritos.");
             return;
         }
 
-        const usuarioIndex = usuarios.findIndex(u => u.usuario === usuarioActivo.usuario);
-        if (usuarioIndex === -1) return;
+        const usuarioIndex = usuarios.findIndex(u => u.usuario === usuarioActivo.usuario);//Trae el indice del arreglo usuarios donde esta guardado el usuario activo
+        if (usuarioIndex === -1) return;//Si no encuentra al usuario corta el addEvent
 
-        const user = usuarios[usuarioIndex];
-        if (!user.favoritos) user.favoritos = [];
+        const user = usuarios[usuarioIndex];//Guarda de forma auxiliar en user el usuario activo
 
-        if (user.favoritos.includes(id)) {
-            // Quitar
-            user.favoritos = user.favoritos.filter(fav => fav !== id);
-            e.target.classList.remove("favorito");
-        } else {
-            // Agregar
-            user.favoritos.push(id);
-            e.target.classList.add("favorito");
+        if (!user.favoritos) {//Si user no tiene favoritos crea ambos atributos vacios
+            user.favoritos = { peliculas: [], series: [] };
         }
 
-        // Guardar cambios
-        usuarios[usuarioIndex] = user;
-        localStorage.setItem("usuarios", JSON.stringify(usuarios));
-        localStorage.setItem("usuarioActivo", JSON.stringify(user));
+        const lista = tipo === "pelicula" ? user.favoritos.peliculas : user.favoritos.series;//El ternario elige si operamos sobre series o peliculas
+
+        const index = lista.indexOf(id);//Si encuentra el id en el array devuelve la posicion. Si no lo encuentra devuelve -1
+        if (index !== -1) {//Si ya esta en la lista y le hicimos click, le borra la clase favorito
+            lista.splice(index, 1);
+            cora.target.classList.remove("favorito");
+        } else {//Si no esta en la lista lo agregamos con la clase favorito
+            lista.push(id);
+            cora.target.classList.add("favorito");
+        }
+
+        usuarios[usuarioIndex] = user;//En el array de usuarios en la posicion del usuario que estamos modificando, guarda las modificaciones que hicimos
+        localStorage.setItem("usuarios", JSON.stringify(usuarios));//Guarda en el local storage los cambios
+        localStorage.setItem("usuarioActivo", JSON.stringify(user));//Guarda en el local storage los cambios
     }
-});Despues probar bien el tema de los corazones pero va bastante bien
-*/ 
+});
 
 function aplicarFiltros(){
     const valorElegido = selectCategoria.value.toLowerCase();

@@ -5,7 +5,7 @@ const objetoVisual = SERIES_Y_PELICULAS.find(p => p.id == id);
 //objeto visual es un objeto donde se guarda el objeto buscado por el id en la url
 console.log(objetoVisual);
 
-function agregarIframe() {
+function agregarIframeYCorazon() {
     const nodeElement = document.querySelector(".video_detalle");//Contenedor del iframe
     const iframeElement = document.createElement("iframe");
     const botonVerElement = document.createElement("a");
@@ -16,6 +16,31 @@ function agregarIframe() {
     iframeElement.src = objetoVisual.video.iframe;
     nodeElement.appendChild(iframeElement);
     nodeElement.appendChild(botonVerElement);
+
+    const corazon = document.createElement("span");
+    corazon.classList.add("corazon");
+    corazon.dataset.id = objetoVisual.id;
+    corazon.dataset.tipo = objetoVisual.tipo;
+    corazon.innerHTML = "❤";
+
+    // Verifica si ya es favorito (usuario logueado)
+    const usuarioActivo = JSON.parse(localStorage.getItem("usuarioActivo"));
+    const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+
+    if (usuarioActivo) {
+        const userData = usuarios.find(u => u.usuario === usuarioActivo.usuario);
+        if (userData && userData.favoritos) {
+            const esFavorito = objetoVisual.tipo === "pelicula"
+                ? userData.favoritos.peliculas.includes(objetoVisual.id)
+                : userData.favoritos.series.includes(objetoVisual.id);
+
+            if (esFavorito) {
+                corazon.classList.add("favorito");
+            }
+        }
+    }
+
+    nodeElement.appendChild(corazon);
 }
 
 function agregarTitulo() {
@@ -167,10 +192,49 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
+document.addEventListener("click", (cora) => {//Esto se ejecuta cuando haya un click
+    if (cora.target.classList.contains("corazon")) {//Esto verifica si el elemento donde se hizo el click contiene corazon
+        cora.preventDefault();//Hace que no se ejecute la etiqueta <a> de la tarjeta
+        cora.stopPropagation();////Hace que no se ejecute la etiqueta <a> de la tarjeta
 
+        const id = cora.target.dataset.id;
+        const tipo = cora.target.dataset.tipo;
 
+        const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];//Trae todos los usuarios
+        const usuarioActivo = JSON.parse(localStorage.getItem("usuarioActivo"));//Trae al usuario logueado
 
-agregarIframe();
+        if (!usuarioActivo) {
+            alert("Inicia sesión para guardar favoritos.");
+            return;
+        }
+
+        const usuarioIndex = usuarios.findIndex(u => u.usuario === usuarioActivo.usuario);//Trae el indice del arreglo usuarios donde esta guardado el usuario activo
+        if (usuarioIndex === -1) return;//Si no encuentra al usuario corta el addEvent
+
+        const user = usuarios[usuarioIndex];//Guarda de forma auxiliar en user el usuario activo
+
+        if (!user.favoritos) {//Si user no tiene favoritos crea ambos atributos vacios
+            user.favoritos = { peliculas: [], series: [] };
+        }
+
+        const lista = tipo === "pelicula" ? user.favoritos.peliculas : user.favoritos.series;//El ternario elige si operamos sobre series o peliculas
+
+        const index = lista.indexOf(id);//Si encuentra el id en el array devuelve la posicion. Si no lo encuentra devuelve -1
+        if (index !== -1) {//Si ya esta en la lista y le hicimos click, le borra la clase favorito
+            lista.splice(index, 1);
+            cora.target.classList.remove("favorito");
+        } else {//Si no esta en la lista lo agregamos con la clase favorito
+            lista.push(id);
+            cora.target.classList.add("favorito");
+        }
+
+        usuarios[usuarioIndex] = user;//En el array de usuarios en la posicion del usuario que estamos modificando, guarda las modificaciones que hicimos
+        localStorage.setItem("usuarios", JSON.stringify(usuarios));//Guarda en el local storage los cambios
+        localStorage.setItem("usuarioActivo", JSON.stringify(user));//Guarda en el local storage los cambios
+    }
+});
+
+agregarIframeYCorazon();
 agregarTemporadasODuracion(objetoVisual);
 agregarGenero(objetoVisual);
 agregarActores(objetoVisual);

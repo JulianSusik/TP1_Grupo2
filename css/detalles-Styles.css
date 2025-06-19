@@ -20,6 +20,20 @@ body {
     margin-left: 0.4em;
 }
 
+.corazon {
+    display: flex;
+    justify-content: center;
+    font-size: 24px;
+    color: gray;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    margin-left: 8px;
+}
+
+.corazon.favorito {
+    color: hotpink;
+}
+
 .video_detalle {
     flex: 1;
     display: flex;
@@ -166,18 +180,20 @@ button#next {
     .boton_ver {
         max-width: 100%;
     }
+
     button#prev,
-button#next {
-    font-size: 1.5rem;
-}
+    button#next {
+        font-size: 1.5rem;
+    }
 }
 
 @media (max-width: 375px) {
     .similares {
         height: 60vh;
     }
+
     button#prev,
-button#next {
-    font-size: 1rem;
-}
+    button#next {
+        font-size: 1rem;
+    }
 }
