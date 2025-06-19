@@ -12,7 +12,10 @@ body {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     margin: 2em 3em;
 }
-
+.mensaje-error {
+  color: #dc3545; /* Rojo para errores */
+  font-size: 0.875rem; /* Tamaño de fuente más pequeño */
+}
 .primary__main {
     width: 95%;
     margin: auto;

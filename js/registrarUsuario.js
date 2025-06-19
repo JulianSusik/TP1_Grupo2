@@ -1,347 +1,257 @@
-function validarSoloLetras(idCampo, idError) { //Funcion donde pasamos los parametros (el input y el error)
-  let valor = document.getElementById(idCampo).value;  //busca el elemento x id y obtenemos el valor que escribió el usuario en el input con el ID recibido
-  let error = document.getElementById(idError);  //se obtiene el error
+// guardamos los mensajes de error
+const ERROR_MESSAGES = {
+  nombre: "Solo se permiten letras",
+  apellido: "Solo se permiten letras",
+  correo: "Ingrese un email válido (ej: ejemplo@correo.com)",
+  usuario: "Solo se permiten letras y números",
+  contrasenia: "La contraseña debe tener al menos 8 caracteres, 2 letras, 2 números y 2 símbolos",
+  contraseniaB: "Las contraseñas no coinciden",
+  numeroTarjeta: "Debe contener exactamente 16 dígitos",
+  codTarjeta: "Debe contener exactamente 3 números",
+  codTarjetaZeros: "La clave no puede ser 000",
+  tarjetaPar: "El último dígito debe ser par (la suma de los anteriores es impar)",
+  tarjetaImpar: "El último dígito debe ser impar (la suma de los anteriores es par)"
+};
+
+
+
+
+
+ 
+  function loginValidate() {
+    let esValido = true;
     
-  
-  const soloLetras = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]*$/; //este es el regex para que solo haya letras tildes, ñ y espacios (/S) 
-  
-  if (!soloLetras.test(valor)) { //si hay algun caracter que no sea una letra 
-    error.innerHTML = "Solo se permiten letras"; //mostramos este erro en el html sino no mostramos nada
-    error.style.color = "red";
-     console.log("error por el valor:", valor);
-  } else {
-    error.innerHTML = "";
-  }
+    // Validar nombre 
+    const nombre = document.getElementById("nombre").value;
+    const nombreError = document.querySelector('.js-nombre-error');
+    if (nombre.trim() === "") {
+  nombreError.textContent = ""; 
+} else if (!/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(nombre)) {
+  nombreError.textContent = ERROR_MESSAGES.nombre;
+  esValido = false;
+} else {
+  nombreError.textContent = "";
 }
 
-
-function validarSoloNumerosYLetras(idCampo, idError) { 
-  let valor = document.getElementById(idCampo).value;  
-  let error = document.getElementById(idError);  
   
-  
-  const soloNumerosYLetras = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9]*$/;
-  
-  if (!soloNumerosYLetras.test(valor)) { 
-    error.innerHTML = "Solo se permiten letras y numeros"; 
-     error.style.color = "red";
-  } else {
-    error.innerHTML = "";
-  }
+  // Validar apellido 
+  const apellido = document.getElementById("apellido").value;
+  const apellidoError = document.querySelector('.js-apellido-error');
+  if (apellido.trim() === "") {
+  apellidoError.textContent = "";
+} else if (!/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(apellido)) {
+  apellidoError.textContent = ERROR_MESSAGES.apellido;
+  esValido = false;
+} else {
+  apellidoError.textContent = "";
 }
 
-function validarEmail(idCampo, idError) {
-  let valor = document.getElementById(idCampo).value;
-  let error = document.getElementById(idError);
   
-  const emailValido = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;  //verificamos q haya algo antes y despues de un @ y que haya un punto y al menos dos letras despues
-  
-  if (!emailValido.test(valor)) {
-    error.innerHTML = "Ingrese un email válido (ej: ejemplo@correo.com)";
-    error.style.color = "red";
-  } else {
-    error.innerHTML = "";
-  }
+  // Validar correo
+  const correo = document.getElementById("correo").value;
+  const emailError = document.querySelector('.js-email-error');
+  if (correo.trim() === "") {
+  emailError.textContent = "";
+} else if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(correo)) {
+  emailError.textContent = ERROR_MESSAGES.correo;
+  esValido = false;
+} else {
+  emailError.textContent = "";
 }
 
-function validarContrasenia(idCampo, idError) {
-  let valor = document.getElementById(idCampo).value;
-  let error = document.getElementById(idError);
   
-  const contraseniaValida = /^(?=(?:.*[A-Za-z]){2,})(?=(?:.*\d){2,})(?=(?:.*[!@#$%^&*()_\-+=?¿¡:;.,<>]){2,}).{8,}$/; 
-  
-  if (!contraseniaValida.test(valor)) {
-    error.innerHTML = "La contraseña debe tener al menos 8 caracteres, 2 letras, 2 números y 2 símbolos";
-    error.style.color = "red";
-  } else {
-    error.innerHTML = "";
-  }
+  // Validar usuario 
+  const usuario = document.getElementById("usuario").value;
+  const usuarioError = document.querySelector('.js-usuario-error');
+  if (usuario.trim() === "") {
+  usuarioError.textContent = "";
+} else if (!/^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9]+$/.test(usuario)) {
+  usuarioError.textContent = ERROR_MESSAGES.usuario;
+  esValido = false;
+} else {
+  usuarioError.textContent = "";
 }
 
-function validarConfirmarContrasenia(idCampo, idError, idContraseniaOriginal) {
-  let valor = document.getElementById(idCampo).value;
-  let original = document.getElementById(idContraseniaOriginal).value;
-  let error = document.getElementById(idError);
   
-  if (valor !== original) {
-    error.innerHTML = "Las contraseñas no coinciden";
-    error.style.color = "red";
-  } else {
-    error.innerHTML = "";
-  }
+  // Validar contraseña
+  const contrasenia = document.getElementById("contrasenia").value;
+  const contraseniaError = document.querySelector('.js-contrasenia-error');
+  if (contrasenia.trim() === "") {
+  contraseniaError.textContent = "";
+} else if (!/^(?=(?:.*[A-Za-z]){2,})(?=(?:.*\d){2,})(?=(?:.*[!@#$%^&*()_\-+=?¿¡:;.,<>]){2,}).{8,}$/.test(contrasenia)) {
+  contraseniaError.textContent = ERROR_MESSAGES.contrasenia;
+  esValido = false;
+} else {
+  contraseniaError.textContent = "";
 }
 
-function validarNumeroTarjeta(idCampo, idError){
-  let valor = document.getElementById(idCampo).value;
-  let error = document.getElementById(idError);
   
-  const numeroTarjetaValido = /^\d{16}$/;
+  // Validar confirmacion de contraseña
+  const contraseniaB = document.getElementById("contraseniaB").value;
+  const contraseniaBError = document.querySelector('.js-contraseniaB-error');
+  if (contrasenia.trim() === "" || contraseniaB.trim() === "") {
+  contraseniaBError.textContent = "";
+} else if (contrasenia !== contraseniaB) {
+  contraseniaBError.textContent = ERROR_MESSAGES.contraseniaB;
+  esValido = false;
+} else {
+  contraseniaBError.textContent = "";
+}
 
-  if (!numeroTarjetaValido.test(valor)) {
-    error.innerHTML = "Debe contener exactamente 16 dígitos";
-    error.style.color = "red";
-    return;
+  
+  // Validar metodo de pago
+  const metodoPagoSeleccionado = document.querySelector("input[name='metodoPago']:checked");
+  if (!metodoPagoSeleccionado) {
+    esValido = false;
   }
   
-  // se suman los primeros 15 numeros
-  let suma = 0;
-for (let i = 0; i < 15; i++) {
-  suma += +valor[i];
-}
-console.log("Suma total:", suma);
-  
-  let ultimoDigito = +valor[15];  
-  
- 
-  if (suma % 2 == 1) { // si la suma es impar
-    if (ultimoDigito % 2 == 0) { // y el ultimo digito es par
-      error.innerHTML = ""; // es correcto y no ponemos ningun error
+  // Validar datos de tarjeta si está seleccionada
+  if (metodoPagoSeleccionado && metodoPagoSeleccionado.id === "tarjeta") {
+    // Validar número de tarjeta
+    const numeroTarjeta = document.getElementById("numeroTarjeta").value;
+    const numeroTarjetaError = document.getElementById('error-numeroTarjeta');
+    
+    if (!/^\d{16}$/.test(numeroTarjeta)) {
+      numeroTarjetaError.textContent = ERROR_MESSAGES.numeroTarjeta;
+      esValido = false;
     } else {
-      error.innerHTML = "El último dígito debe ser par (la suma de los anteriores es impar)";
-      error.style.color = "red";
-    }
-  } else { // si la suma es par
-    if (ultimoDigito % 2 == 1) {
-      error.innerHTML = "";
-    } else {
-      error.innerHTML = "El último dígito debe ser impar (la suma de los anteriores es par)";
-      error.style.color = "red";
-    }
-  }
-}
-
-
-
-function validarCodTarjeta(idCampo, idError) {
-  let valor = document.getElementById(idCampo).value.trim();
-  let error = document.getElementById(idError);
-  
-  const codigoTarjetaValido = /^\d{3}$/;
-  
-  if (!codigoTarjetaValido.test(valor)) {
-    error.innerHTML = "Debe contener exactamente 3 números.";
-    error.style.color = "red";
-  } else if (valor === "000") {
-    error.innerHTML = "La clave no puede ser 000.";
-    error.style.color = "red";
-  } else {
-    error.innerHTML = "";
-  }
-}
-
-
-function esTarjetaSeleccionada() {
-  return document.getElementById("tarjeta").checked;
-}
-
-document.getElementById("nombre").addEventListener("input", function() {  //buscamos el elemento x id y cuando el usuario modifica el input se ejecuta el evento
-  validarSoloLetras("nombre", "error-nombre"); //funcion anonima q se ejecuta cuando ocurre el evento
- // actualizarEstadoBoton();
-});
-
-document.getElementById("apellido").addEventListener("input", function() {
-  validarSoloLetras("apellido", "error-apellido");
-//  actualizarEstadoBoton();
-});
-
-document.getElementById("correo").addEventListener("input", function(){
-  validarEmail("correo", "error-email");
- // actualizarEstadoBoton();
-}); 
-
-document.getElementById("usuario").addEventListener("input", function(){
-  validarSoloNumerosYLetras("usuario", "error-usuario");
- // actualizarEstadoBoton();
-}); 
-
-document.getElementById("contrasenia").addEventListener("input", function(){
-  validarContrasenia("contrasenia", "error-contrasenia");
- // actualizarEstadoBoton();
-});
-
-document.getElementById("contraseniaB").addEventListener("input", function(){
-  validarConfirmarContrasenia("contraseniaB", "error-contraseniaB", "contrasenia");
- // actualizarEstadoBoton();
-}); 
-
-document.getElementById("numeroTarjeta").addEventListener("input", function () {
-  if (esTarjetaSeleccionada()) {
-    validarNumeroTarjeta("numeroTarjeta", "error-numeroTarjeta");
-  } else {
-    document.getElementById("error-numeroTarjeta").innerHTML = "";
-  }
- // actualizarEstadoBoton();
-});
-
-document.getElementById("codTarjeta").addEventListener("input", function () {
-  if (esTarjetaSeleccionada()) {
-    validarCodTarjeta("codTarjeta", "error-codTarjeta");
-  } else {
-    document.getElementById("error-codTarjeta").innerHTML = "";
-  }
-  //actualizarEstadoBoton();
-});
-
-// si se cambia el metodo de pago se borran los errores
-const opcionesMetodoPago = document.querySelectorAll("input[name='metodoPago']"); 
-opcionesMetodoPago.forEach(function (opcion) {
-  opcion.addEventListener("change", function () {
-     console.log("Método de pago seleccionado:", opcion.id);
-    if (!esTarjetaSeleccionada()) {
-      document.getElementById("numeroTarjeta").value = "";
-      document.getElementById("codTarjeta").value = "";
-      document.getElementById("error-numeroTarjeta").innerHTML = "";
-      document.getElementById("error-codTarjeta").innerHTML = "";
+      // Validar último dígito según suma de los 15 anteriores
+      let suma = 0;
+      for (let i = 0; i < 15; i++) {
+        suma += parseInt(numeroTarjeta[i]);
+      }
+      const ultimoDigito = parseInt(numeroTarjeta[15]);
       
-      //actualizarEstadoBoton();
+      if (suma % 2 === 1) { // suma impar
+        if (ultimoDigito % 2 !== 0) { // último dígito debe ser par
+          numeroTarjetaError.textContent = ERROR_MESSAGES.tarjetaPar;
+          esValido = false;
+        } else {
+          numeroTarjetaError.textContent = "";
+        }
+      } else { // suma par
+        if (ultimoDigito % 2 !== 1) { // último dígito debe ser impar
+          numeroTarjetaError.textContent = ERROR_MESSAGES.tarjetaImpar;
+          esValido = false;
+        } else {
+          numeroTarjetaError.textContent = "";
+        }
+      }
     }
-  });
-});
-
-document.querySelector(".primary__main__form").addEventListener("submit", function (event) { //aplicando el DOM buscamos el formulario con el query selector y escucha el evento sumbit
-  // se prueban las validaciones
-  validarSoloLetras("nombre", "error-nombre");
-  validarSoloLetras("apellido", "error-apellido");
-  validarEmail("correo", "error-email");
-  validarSoloNumerosYLetras("usuario", "error-usuario");
-  validarContrasenia("contrasenia", "error-contrasenia");
-  validarConfirmarContrasenia("contraseniaB", "error-contraseniaB", "contrasenia");
-  if (esTarjetaSeleccionada()) {
-    validarNumeroTarjeta("numeroTarjeta", "error-numeroTarjeta");
-    validarCodTarjeta("codTarjeta", "error-codTarjeta");
+    
+    // Validar codigo de tarjeta
+    const codTarjeta = document.getElementById("codTarjeta").value;
+    const codTarjetaError = document.getElementById('error-codTarjeta');
+    
+    if (!/^\d{3}$/.test(codTarjeta)) {
+      codTarjetaError.textContent = ERROR_MESSAGES.codTarjeta;
+      esValido = false;
+    } else if (codTarjeta === "000") {
+      codTarjetaError.textContent = ERROR_MESSAGES.codTarjetaZeros;
+      esValido = false;
+    } else {
+      codTarjetaError.textContent = "";
+    }
   } else {
-    document.getElementById("error-numeroTarjeta").innerHTML = "";
-    document.getElementById("error-codTarjeta").innerHTML = "";
+    // Limpiar errores de tarjeta si no esta seleccionada
+    document.getElementById('error-numeroTarjeta').textContent = "";
+    document.getElementById('error-codTarjeta').textContent = "";
   }
   
- 
+  // actualizar boton
+  const boton = document.getElementById("buttonConfirm");
+  const camposObligatorios = [nombre, apellido, correo, usuario, contrasenia, contraseniaB];
   
-  const errores = document.querySelectorAll("p.mensaje-error"); // busca todos los elementos p con clase mensaje-error donde se muestran los errores osea si hay texto
-  let hayErrores = false; // variable que usamos como bandera
-  
-  errores.forEach(function (p) { //se recorre cada elemento p de la lista de errores
-    if (p.innerText.trim() !== "") {  //el .trim es para que no tome como valido los espacios
-      hayErrores = true;
-    }
-  });
-  
-  
-  if (hayErrores) {
-    event.preventDefault();
-    alert("Por favor, corregí los errores antes de enviar el formulario");
+  if (metodoPagoSeleccionado && metodoPagoSeleccionado.id === "tarjeta") {
+    const numeroTarjeta = document.getElementById("numeroTarjeta").value;
+    const codTarjeta = document.getElementById("codTarjeta").value;
+    camposObligatorios.push(numeroTarjeta, codTarjeta);
   }
+  
+  const camposVacios = camposObligatorios.some(campo => campo.trim() === "");
+  boton.disabled = !esValido || camposVacios || !metodoPagoSeleccionado;
+  
+  return esValido && !camposVacios && metodoPagoSeleccionado;
+}
 
-}); 
-
-document.querySelector("#buttonConfirm").addEventListener("click", function(){
-//vuelvo a poner las validaciones para q no guarde cosas vacias o con errores
-   validarSoloLetras("nombre", "error-nombre");
-  validarSoloLetras("apellido", "error-apellido");
-  validarEmail("correo", "error-email");
-  validarSoloNumerosYLetras("usuario", "error-usuario");
-  validarContrasenia("contrasenia", "error-contrasenia");
-  validarConfirmarContrasenia("contraseniaB", "error-contraseniaB", "contrasenia");
-
-  if (esTarjetaSeleccionada()) {
-    validarNumeroTarjeta("numeroTarjeta", "error-numeroTarjeta");
-    validarCodTarjeta("codTarjeta", "error-codTarjeta");
-  } else {
-    document.getElementById("error-numeroTarjeta").innerHTML = "";
-    document.getElementById("error-codTarjeta").innerHTML = "";
-  }
-  let errores = document.querySelectorAll("p.mensaje-error");// verificamos que no haya errores
-  let hayErrores = false;
-  errores.forEach(function (p) {
-    if (p.innerText.trim() !== "") {
-      hayErrores = true;
-    }
-  });
-  if (hayErrores) {
+// Función para guardar en localStorage
+function guardarUsuario() {
+  if (!loginValidate()) {
     alert("No se pueden guardar los datos. Hay errores en el formulario.");
-    return;
+    return false;
   }
-  let nombreUsuarioNuevo = document.querySelector("#nombre").value;
-  let apellidoUsuarioNuevo = document.querySelector("#apellido").value;    
-  let correoUsuarioNuevo = document.querySelector("#correo").value;       
-  let nombreDeUsuarioUsuarioNuevo = document.querySelector("#usuario").value; 
-  let contraseniaUsuarioNuevo = document.querySelector("#contrasenia").value; 
-
   
-
-  let nuevoUsuario = {
-    nombre: nombreUsuarioNuevo,
-    apellido: apellidoUsuarioNuevo,
-    correo: correoUsuarioNuevo,
-    usuario: nombreDeUsuarioUsuarioNuevo,
-    contrasenia: contraseniaUsuarioNuevo
+  const nuevoUsuario = {
+    nombre: document.getElementById("nombre").value,
+    apellido: document.getElementById("apellido").value,
+    correo: document.getElementById("correo").value,
+    usuario: document.getElementById("usuario").value,
+    contrasenia: document.getElementById("contrasenia").value
   };
-
-  let usuarioGuardados = localStorage.getItem("usuarios");
-  let usuarios;
-  if (usuarioGuardados != null){
-    usuarios = JSON.parse(usuarioGuardados);
-  } else{
-    usuarios = [];
+  
+  // Obtener usuarios existentes
+  let usuarios = [];
+  const usuariosGuardados = localStorage.getItem("usuarios");
+  if (usuariosGuardados) {
+    usuarios = JSON.parse(usuariosGuardados);
   }
-  // el metodo .some devuelve true si se cumple al menos una condicio
-  let usuarioExistente = usuarios.some(function(usuario) { 
-    return usuario.usuario === nuevoUsuario.usuario || usuario.correo === nuevoUsuario.correo; //verificamos que no se repita usuario o mail
-  });
+  
+  // Verificar si el usuario ya existe
+  const usuarioExistente = usuarios.some(usuario => 
+    usuario.usuario === nuevoUsuario.usuario || usuario.correo === nuevoUsuario.correo
+  );
+  
   if (usuarioExistente) {
     alert("El nombre de usuario o el correo ya están registrados.");
-    return;
+    return false;
   }
-
-
+  
+  // Guardar nuevo usuario
   usuarios.push(nuevoUsuario);
   localStorage.setItem("usuarios", JSON.stringify(usuarios));
-
   alert("Usuario registrado con éxito");
- 
-});
-/*
-   window.addEventListener("DOMContentLoaded", function () {
-     actualizarEstadoBoton();
-   });
+  return true;
+}
 
-function actualizarEstadoBoton() {
-  const errores = document.querySelectorAll("p.mensaje-error");
-  let hayErrores = false;
+// Event listeners
+document.addEventListener("DOMContentLoaded", function() {
+  // Validar en tiempo real mientras se escribe
+  const campos = ["nombre", "apellido", "correo", "usuario", "contrasenia", "contraseniaB", "numeroTarjeta", "codTarjeta"];
   
-  errores.forEach(function (p) {
-    if (p.innerText.trim() !== "") {
-      hayErrores = true;
+  campos.forEach(campo => {
+    const elemento = document.getElementById(campo);
+    if (elemento) {
+      elemento.addEventListener("input", loginValidate);
     }
   });
-
-  document.getElementById("buttonConfirm").disabled = hayErrores;
-}
-*/
-document.querySelector("#buttonConfirm").addEventListener("click", function(){
-  let nombreUsuarioNuevo = document.querySelector("#nombre").value;
-  let apellidoUsuarioNuevo = document.querySelector("#nombre").value;
-  let correoUsuarioNuevo = document.querySelector("#nombre").value;
-  let nombreDeUsuarioUsuarioNuevo = document.querySelector("#nombre").value;
-  let contraseniaUsuarioNuevo = document.querySelector("#nombre").value;
-
-  let nuevoUsuario = {
-    nombre: nombreUsuarioNuevo,
-    apellido: apellidoUsuarioNuevo,
-    correo: correoUsuarioNuevo,
-    usuario: nombreDeUsuarioUsuarioNuevo,
-    contrasenia: contraseniaUsuarioNuevo
-  };
-
-  let usuarioGuardados = localStorage.getItem("usuarios");
-  let usuarios;
-  if (usuarioGuardados != null){
-    usuarios = JSON.parse(usuarioGuardados);
-  } else{
-    usuarios = [];
+  
+  // Validar cuando cambia el método de pago
+  const opcionesMetodoPago = document.querySelectorAll("input[name='metodoPago']");
+  opcionesMetodoPago.forEach(opcion => {
+    opcion.addEventListener("change", function() {
+      // Limpiar campos de tarjeta si no está seleccionada
+      if (opcion.id !== "tarjeta") {
+        document.getElementById("numeroTarjeta").value = "";
+        document.getElementById("codTarjeta").value = "";
+      }
+      loginValidate();
+    });
+  });
+  
+  // Botón de confirmación
+  document.getElementById("buttonConfirm").addEventListener("click", guardarUsuario);
+  
+  // Envío del formulario
+  const formulario = document.querySelector(".primary__main__form");
+  if (formulario) {
+    formulario.addEventListener("submit", function(event) {
+      if (!loginValidate()) {
+        event.preventDefault();
+        alert("Por favor, corregí los errores antes de enviar el formulario");
+      }
+    });
   }
-  usuarios.push(nuevoUsuario);
-  localStorage.setItem("usuarios", JSON.stringify(usuarios));
-
-
-
-})
+  
+ 
+});
+loginValidate();
