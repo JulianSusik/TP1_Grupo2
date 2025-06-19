@@ -14,7 +14,9 @@ loginForm.addEventListener("submit", function(e) { //agregamos evento tipo sumbi
     (user) => user.usuario === usuario && user.contrasenia === contrasenia
   );
 
-  if (!usuarioValido) {
+  if (usuarioValido) {
+    localStorage.setItem("usuarioActivo", JSON.stringify(usuarioValido))
+  } else{
     alert("Usuario o contraseña incorrectos!");
     return;
   }

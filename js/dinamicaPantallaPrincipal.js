@@ -23,6 +23,92 @@ function mostrarPeliculasYSeries(arrayDePeliculasYSeries) {
     });//Esta funcion crea todas las peliculas y series dinamicas en el html principal
     //Recorriendo todo el array de objetos y por cada objeto crea su a con img
 }
+/*
+function mostrarPeliculasYSeries(arrayDePeliculasYSeries) {
+    const nodoElement = document.querySelector(".grilla-contenido");
+    nodoElement.innerHTML = "";
+
+    const usuarioActivo = JSON.parse(localStorage.getItem("usuarioActivo"));
+    const todosLosUsuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+
+    let favoritos = [];
+
+    if (usuarioActivo) {
+        const usuarioData = todosLosUsuarios.find(u => u.usuario === usuarioActivo.usuario);
+        if (usuarioData && Array.isArray(usuarioData.favoritos)) {
+            favoritos = usuarioData.favoritos;
+        }
+    }
+
+    arrayDePeliculasYSeries.forEach(item => {
+        const contenidoElement = document.createElement("a");
+        contenidoElement.className = "tarjeta-contenido";
+        contenidoElement.href = `./serie-pelicula.html?id=${item.id}`;
+
+        const imagenElement = document.createElement("img");
+        imagenElement.src = item.imagen.url;
+        imagenElement.alt = item.imagen.alt;
+
+        const tituloElement = document.createElement("h4");
+        tituloElement.className = "titulo-tarjeta";
+        tituloElement.textContent = item.nombre;
+
+        const corazon = document.createElement("span");
+        corazon.classList.add("corazon");
+        corazon.dataset.id = item.nombre;  // Usás el nombre como ID único
+        corazon.innerHTML = "❤";
+
+        // ✅ Si ya es favorito, marcarlo
+        if (favoritos.includes(item.nombre)) {
+            corazon.classList.add("favorito");
+        }
+
+        // Añadir elementos al DOM
+        contenidoElement.appendChild(imagenElement);
+        contenidoElement.appendChild(tituloElement);
+        contenidoElement.appendChild(corazon);
+        nodoElement.appendChild(contenidoElement);
+    });
+}
+
+document.addEventListener("click", (e) => {
+    if (e.target.classList.contains("corazon")) {
+        e.preventDefault(); // Evita que el enlace se ejecute
+        e.stopPropagation(); // Evita que el evento burbujee al <a>
+
+        const id = e.target.dataset.id;
+        const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+        const usuarioActivo = JSON.parse(localStorage.getItem("usuarioActivo"));
+
+        if (!usuarioActivo) {
+            alert("Inicia sesión para guardar favoritos.");
+            return;
+        }
+
+        const usuarioIndex = usuarios.findIndex(u => u.usuario === usuarioActivo.usuario);
+        if (usuarioIndex === -1) return;
+
+        const user = usuarios[usuarioIndex];
+        if (!user.favoritos) user.favoritos = [];
+
+        if (user.favoritos.includes(id)) {
+            // Quitar
+            user.favoritos = user.favoritos.filter(fav => fav !== id);
+            e.target.classList.remove("favorito");
+        } else {
+            // Agregar
+            user.favoritos.push(id);
+            e.target.classList.add("favorito");
+        }
+
+        // Guardar cambios
+        usuarios[usuarioIndex] = user;
+        localStorage.setItem("usuarios", JSON.stringify(usuarios));
+        localStorage.setItem("usuarioActivo", JSON.stringify(user));
+    }
+});Despues probar bien el tema de los corazones pero va bastante bien
+*/ 
+
 function aplicarFiltros(){
     const valorElegido = selectCategoria.value.toLowerCase();
     const busquedaPalabra = busquedaNombre.value.toLowerCase();

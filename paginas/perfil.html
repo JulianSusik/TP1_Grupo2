@@ -60,19 +60,19 @@
         </header>
         <main>
         <section class="section__button--cerrarSesion">
-            <a class="btn btn2" href="../index.html">Cerrar Sesion</a>
+            <a class="btn btn2 cerrar-sesion" href="../index.html">Cerrar Sesion</a>
         </section>
-        <form action="../paginas/pantalla-principal.html">
+        <form class="form">
         <section class="perfil">
             <div class="perfil__avatar">
                 <img src="../images/4792929.png" alt="foto-avatar">
-                <p>Antonio</p>
+                <p class="usuario-js"></p>
             </div>
             <div class="perfil__datos">
                 <h4>Datos</h4>
                 <div class="perfil__datos-grupo">
                     <p>E-Mail</p>
-                    <p>usuario@gmail.com</p>
+                    <p class="email-js"></p>
                 </div>
                 <div class="perfil__datos-grupo">
                     <p>Contraseña</p>
@@ -82,10 +82,17 @@
                     <label for="contraseña-nueva">Nueva Contraseña</label>
                     <input type="password" name="contraseña-nueva" id="contraseña-nueva" placeholder="Ingrese nueva contraseña">
                 </div>
+                <div>
+                    <p id="mensaje-error-js" class= "mensaje-error" ></p>
+                </div>
                 <div class="perfil__datos-grupo">
                     <label for="repetir-contraseña">Repetir Contraseña</label>
                     <input type="password" name="repetir-contraseña" id="repetir-contraseña" placeholder="Repita nueva contraseña">
                 </div>
+                <div>
+                    <p id="mensaje-errorb-js" class= "mensaje-error" ></p>
+                </div>
+                
             </div>
 
             <div class="perfil__metodo-pago">
@@ -114,8 +121,8 @@
             </div>
         </section>
             <div class="botones">
-                <input class="btn btn1" type="submit" method="get" value="Confirmar cambios">
-                <a class="btn btn2" href="../index.html">Cancelar suscripcion</a>
+                <input class="btn btn1 confirmar-cambios__js" id="confirmar-cambios-js" type="submit" method="get" value="Confirmar cambios">
+                <a class="btn btn2 boton-cancelar-js" href="../index.html">Cancelar suscripcion</a>
             </div>
         </form>
     </main>
@@ -130,5 +137,7 @@
             <p>© GRUPO 2</p>
         </div>
     </footer>
+    <script src="../js/perfil.js"></script>
+    <!-- <script src="../js/registrarUsuario.js"></script> -->
 </body>
 </html>
