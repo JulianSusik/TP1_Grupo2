@@ -60,7 +60,7 @@ function actualizarEstadoBoton() {
 function registerValidate() {
   const registerForm = document.getElementById('registerForm')
   const submitBtn = registerForm.querySelector('button')
-  const messageSuccess = document.querySelector('.js-message')
+
 
 
   const radioTarjeta = document.getElementById('tarjeta');
@@ -262,7 +262,7 @@ function registerValidate() {
       });
 
       if (usuarioRepetido || correoRepetido) {
-        messageSuccess.textContent = "";
+       
 
         if (usuarioRepetido) {
           usuarioError.textContent = "Este nombre de usuario ya está registrado.";
@@ -322,7 +322,6 @@ function registerValidate() {
       setTimeout(function () {
         submitBtn.disabled = false;
         submitBtn.textContent = "Confirmar";
-        messageSuccess.textContent = "Usuario registrado";
         registerForm.reset();
         actualizarEstadoBoton();
         window.location.href = "../index.html";
