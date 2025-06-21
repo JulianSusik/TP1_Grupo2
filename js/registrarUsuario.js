@@ -18,7 +18,7 @@ function actualizarEstadoBoton() {
   const registerForm = document.getElementById('registerForm');
   const submitBtn = registerForm.querySelector('button');
 
-  // se obtienen todos los campos desde el formulario (más organizado)
+  // se obtienen todos los campos desde el formulario 
   const nombre = registerForm.querySelector('#nombre').value.trim();
   const apellido = registerForm.querySelector('#apellido').value.trim();
   const correo = registerForm.querySelector('#correo').value.trim();
