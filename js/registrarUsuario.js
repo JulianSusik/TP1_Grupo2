@@ -262,7 +262,7 @@ function registerValidate() {
       });
 
       if (usuarioRepetido || correoRepetido) {
-       
+
 
         if (usuarioRepetido) {
           usuarioError.textContent = "Este nombre de usuario ya está registrado.";
