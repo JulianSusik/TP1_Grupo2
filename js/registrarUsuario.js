@@ -17,7 +17,7 @@ const ERROR_MESSAGES = {
 function actualizarEstadoBoton() {
   const registerForm = document.getElementById('registerForm');
   const submitBtn = registerForm.querySelector('button');
-  
+
   // se obtienen todos los campos y los metodos de pago
   const nombre = document.getElementById("nombre").value.trim();
   const apellido = document.getElementById("apellido").value.trim();
@@ -29,29 +29,29 @@ function actualizarEstadoBoton() {
   const radioTarjeta = document.getElementById('tarjeta');
   const radioCupon = document.getElementById('cupon');
   const radioTransferencia = document.getElementById('transferencia');
-  
+
   //validar que los campos no esten vacios
-  const camposBasicosCompletos = nombre !== "" && apellido !== "" && correo !== "" && 
-                                 usuario !== "" && contrasenia !== "" && contraseniaB !== "";
-  
+  const camposBasicosCompletos = nombre !== "" && apellido !== "" && correo !== "" &&
+    usuario !== "" && contrasenia !== "" && contraseniaB !== "";
+
   // Validar que se seleccionó un método de pago
   const metodoPagoSeleccionado = radioTarjeta.checked || radioCupon.checked || radioTransferencia.checked;
-  
-  
+
+
   let camposMetodoPagoCompletos = true;
-  
+
   if (radioTarjeta.checked) {
     const numeroTarjeta = document.getElementById("numeroTarjeta").value.trim();
     const codTarjeta = document.getElementById("codTarjeta").value.trim();
     camposMetodoPagoCompletos = numeroTarjeta !== "" && codTarjeta !== "";
   }
-  
+
   if (radioCupon.checked) {
     const pagoFacil = document.getElementById('pago-facil').checked;
     const rapiPago = document.getElementById('rapi-pago').checked;
     camposMetodoPagoCompletos = pagoFacil || rapiPago;
   }
-  
+
   // Habilitar botón solo si todo está completo
   submitBtn.disabled = !(camposBasicosCompletos && metodoPagoSeleccionado && camposMetodoPagoCompletos);
 }
@@ -62,7 +62,7 @@ function registerValidate() {
   const submitBtn = registerForm.querySelector('button')
   const messageSuccess = document.querySelector('.js-message')
 
-  
+
   const radioTarjeta = document.getElementById('tarjeta');
   const radioCupon = document.getElementById('cupon');
   const radioTransferencia = document.getElementById('transferencia');
@@ -74,54 +74,54 @@ function registerValidate() {
   document.getElementById('usuario').addEventListener('input', actualizarEstadoBoton);
   document.getElementById('contrasenia').addEventListener('input', actualizarEstadoBoton);
   document.getElementById('contraseniaB').addEventListener('input', actualizarEstadoBoton);
-  
+
   // Campos de tarjeta
   document.getElementById('numeroTarjeta').addEventListener('input', actualizarEstadoBoton);
   document.getElementById('codTarjeta').addEventListener('input', actualizarEstadoBoton);
-  
+
   // Métodos de pago
   radioTarjeta.addEventListener('change', actualizarEstadoBoton);
   radioCupon.addEventListener('change', actualizarEstadoBoton);
   radioTransferencia.addEventListener('change', actualizarEstadoBoton);
-  
+
   // Checkboxes de cupón
   document.getElementById('pago-facil').addEventListener('change', actualizarEstadoBoton);
   document.getElementById('rapi-pago').addEventListener('change', actualizarEstadoBoton);
 
   // si el usuario selecciona tarjeta
-  radioTarjeta.addEventListener('change', function() {
-    if (this.checked) { 
+  radioTarjeta.addEventListener('change', function () {
+    if (this.checked) {
       document.getElementById('pago-facil').checked = false;
       document.getElementById('rapi-pago').checked = false;
     }
-    actualizarEstadoBoton(); 
+    actualizarEstadoBoton();
   });
 
   // si el usuario selecciona cupon de pago
-  radioCupon.addEventListener('change', function() {
-    if (this.checked) { 
-      
+  radioCupon.addEventListener('change', function () {
+    if (this.checked) {
+
       document.getElementById('numeroTarjeta').value = '';
       document.getElementById('codTarjeta').value = '';
     }
-    actualizarEstadoBoton(); 
+    actualizarEstadoBoton();
   });
 
- // si el usuario selecciona transferencia
-  radioTransferencia.addEventListener('change', function() {
-    if (this.checked) { 
+  // si el usuario selecciona transferencia
+  radioTransferencia.addEventListener('change', function () {
+    if (this.checked) {
       document.getElementById('numeroTarjeta').value = '';
       document.getElementById('codTarjeta').value = '';
       document.getElementById('pago-facil').checked = false;
       document.getElementById('rapi-pago').checked = false;
     }
-    actualizarEstadoBoton(); 
+    actualizarEstadoBoton();
   });
 
   //se ejecuta apenas carga la pagina
   actualizarEstadoBoton();
 
-  registerForm.addEventListener('submit', function(event){
+  registerForm.addEventListener('submit', function (event) {
     event.preventDefault();
 
     // Inputs a validar
@@ -158,12 +158,12 @@ function registerValidate() {
     let isFormValid = true;
 
     // Validaciones existentes
-    if(!/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(nombre) || nombre ===  ""){
+    if (!/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(nombre) || nombre === "") {
       nombreError.textContent = ERROR_MESSAGES.nombre
       isFormValid = false;
     }
 
-    if(!/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(apellido) || apellido ===  ""){
+    if (!/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(apellido) || apellido === "") {
       apellidoError.textContent = ERROR_MESSAGES.apellido
       isFormValid = false;
     }
@@ -193,50 +193,50 @@ function registerValidate() {
       isFormValid = false;
     }
 
-    
-   if (radioTarjeta.checked) {
 
-  if (numeroTarjeta === "") {
-    numeroTarjetaError.textContent = "El número de tarjeta es obligatorio";
-    isFormValid = false;
-  // regex para verificar que hayan 16 numeros
-  } else if (!/^\d{16}$/.test(numeroTarjeta)) {
-    numeroTarjetaError.textContent = ERROR_MESSAGES.numeroTarjeta;
-    isFormValid = false;
-  } else {
-   
-    let suma = 0;
-    // se suman los primero 15 numeros
-    for (let i = 0; i < 15; i++) {
-      suma += parseInt(numeroTarjeta[i]);
-    }
-    let ultimoDigito = parseInt(numeroTarjeta[15]); // guardamos el ultimo digito
+    if (radioTarjeta.checked) {
 
-    // Si la suma es par, el último dígito debe ser impar
-    if (suma % 2 === 0 && ultimoDigito % 2 === 0) {
-      numeroTarjetaError.textContent = ERROR_MESSAGES.tarjetaImpar;
-      isFormValid = false;
-    // Si la suma es impar, el último dígito debe ser par
-    } else if (suma % 2 === 1 && ultimoDigito % 2 === 1) {
-      numeroTarjetaError.textContent = ERROR_MESSAGES.tarjetaPar;
-      isFormValid = false;
-    }
-  }
+      if (numeroTarjeta === "") {
+        numeroTarjetaError.textContent = "El número de tarjeta es obligatorio";
+        isFormValid = false;
+        // regex para verificar que hayan 16 numeros
+      } else if (!/^\d{16}$/.test(numeroTarjeta)) {
+        numeroTarjetaError.textContent = ERROR_MESSAGES.numeroTarjeta;
+        isFormValid = false;
+      } else {
+
+        let suma = 0;
+        // se suman los primero 15 numeros
+        for (let i = 0; i < 15; i++) {
+          suma += parseInt(numeroTarjeta[i]);
+        }
+        let ultimoDigito = parseInt(numeroTarjeta[15]); // guardamos el ultimo digito
+
+        // Si la suma es par, el último dígito debe ser impar
+        if (suma % 2 === 0 && ultimoDigito % 2 === 0) {
+          numeroTarjetaError.textContent = ERROR_MESSAGES.tarjetaImpar;
+          isFormValid = false;
+          // Si la suma es impar, el último dígito debe ser par
+        } else if (suma % 2 === 1 && ultimoDigito % 2 === 1) {
+          numeroTarjetaError.textContent = ERROR_MESSAGES.tarjetaPar;
+          isFormValid = false;
+        }
+      }
 
       // validamos codigo de la tarjeta
       if (!/^\d{3}$/.test(codTarjeta)) {
         codTarjetaError.textContent = ERROR_MESSAGES.codTarjeta;
         isFormValid = false;
-      
+
       } else if (codTarjeta === "000") {
         codTarjetaError.textContent = ERROR_MESSAGES.codTarjetaZeros;
         isFormValid = false;
       }
     }
 
-   
+
     if (radioCupon.checked) {
-     
+
       const pagoFacil = document.getElementById('pago-facil').checked;
       const rapiPago = document.getElementById('rapi-pago').checked;
       if (!pagoFacil && !rapiPago) {
@@ -251,18 +251,32 @@ function registerValidate() {
 
       // Verificar si el usuario o correo ya existe
       const usuariosGuardados = JSON.parse(localStorage.getItem("usuarios")) || [];
-      const usuarioYaExiste = usuariosGuardados.some(function (usuarioGuardado) {
-        return usuarioGuardado.usuario === usuario || usuarioGuardado.correo === correo;
+
+
+      const usuarioRepetido = usuariosGuardados.some(function (usuarioGuardado) {
+        return usuarioGuardado.usuario === usuario;
       });
 
-      if (usuarioYaExiste) {
+      const correoRepetido = usuariosGuardados.some(function (usuarioGuardado) {
+        return usuarioGuardado.correo === correo;
+      });
+
+      if (usuarioRepetido || correoRepetido) {
         messageSuccess.textContent = "";
-        usuarioError.textContent = "Este nombre de usuario ya está registrado.";
-        correoError.textContent = "Este nombre de correo ya está registrado.";
+
+        if (usuarioRepetido) {
+          usuarioError.textContent = "Este nombre de usuario ya está registrado.";
+        }
+
+        if (correoRepetido) {
+          correoError.textContent = "Este correo ya está registrado.";
+        }
+
         submitBtn.disabled = false;
         submitBtn.textContent = "Confirmar";
         return;
       }
+
 
       // determinamos metodo de pago
       let metodoPago = "";
@@ -284,13 +298,13 @@ function registerValidate() {
         metodoPago
       };
 
-      
+
       if (radioTarjeta.checked) {
         usuarioData.numeroTarjeta = numeroTarjeta;
         usuarioData.codTarjeta = codTarjeta;
       }
 
-      
+
       if (radioCupon.checked) {
         usuarioData.tipoCupon = [];
         if (document.getElementById("pago-facil").checked) {
@@ -301,7 +315,7 @@ function registerValidate() {
         }
       }
 
-     
+
       usuariosGuardados.push(usuarioData);
       localStorage.setItem("usuarios", JSON.stringify(usuariosGuardados));
 
@@ -309,9 +323,9 @@ function registerValidate() {
         submitBtn.disabled = false;
         submitBtn.textContent = "Confirmar";
         messageSuccess.textContent = "Usuario registrado";
-        registerForm.reset(); 
-        actualizarEstadoBoton(); 
-         window.location.href = "../index.html";
+        registerForm.reset();
+        actualizarEstadoBoton();
+        window.location.href = "../index.html";
       }, 1000);
     }
   });
