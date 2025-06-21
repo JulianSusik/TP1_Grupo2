@@ -10,248 +10,310 @@ const ERROR_MESSAGES = {
   codTarjeta: "Debe contener exactamente 3 números",
   codTarjetaZeros: "La clave no puede ser 000",
   tarjetaPar: "El último dígito debe ser par (la suma de los anteriores es impar)",
-  tarjetaImpar: "El último dígito debe ser impar (la suma de los anteriores es par)"
+  tarjetaImpar: "El último dígito debe ser impar (la suma de los anteriores es par)",
+  metodoPago: "Debe seleccionar un método de pago"
 };
 
-
-
-
-
- 
-  function loginValidate() {
-    let esValido = true;
-    
-    // Validar nombre 
-    const nombre = document.getElementById("nombre").value;
-    const nombreError = document.querySelector('.js-nombre-error');
-    if (nombre.trim() === "") {
-  nombreError.textContent = ""; 
-} else if (!/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(nombre)) {
-  nombreError.textContent = ERROR_MESSAGES.nombre;
-  esValido = false;
-} else {
-  nombreError.textContent = "";
-}
-
+function actualizarEstadoBoton() {
+  const registerForm = document.getElementById('registerForm');
+  const submitBtn = registerForm.querySelector('button');
   
-  // Validar apellido 
-  const apellido = document.getElementById("apellido").value;
-  const apellidoError = document.querySelector('.js-apellido-error');
-  if (apellido.trim() === "") {
-  apellidoError.textContent = "";
-} else if (!/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(apellido)) {
-  apellidoError.textContent = ERROR_MESSAGES.apellido;
-  esValido = false;
-} else {
-  apellidoError.textContent = "";
-}
+  // se obtienen todos los campos y los metodos de pago
+  const nombre = document.getElementById("nombre").value.trim();
+  const apellido = document.getElementById("apellido").value.trim();
+  const correo = document.getElementById("correo").value.trim();
+  const usuario = document.getElementById("usuario").value.trim();
+  const contrasenia = document.getElementById("contrasenia").value.trim();
+  const contraseniaB = document.getElementById("contraseniaB").value.trim();
 
+  const radioTarjeta = document.getElementById('tarjeta');
+  const radioCupon = document.getElementById('cupon');
+  const radioTransferencia = document.getElementById('transferencia');
   
-  // Validar correo
-  const correo = document.getElementById("correo").value;
-  const emailError = document.querySelector('.js-email-error');
-  if (correo.trim() === "") {
-  emailError.textContent = "";
-} else if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(correo)) {
-  emailError.textContent = ERROR_MESSAGES.correo;
-  esValido = false;
-} else {
-  emailError.textContent = "";
-}
-
+  //validar que los campos no esten vacios
+  const camposBasicosCompletos = nombre !== "" && apellido !== "" && correo !== "" && 
+                                 usuario !== "" && contrasenia !== "" && contraseniaB !== "";
   
-  // Validar usuario 
-  const usuario = document.getElementById("usuario").value;
-  const usuarioError = document.querySelector('.js-usuario-error');
-  if (usuario.trim() === "") {
-  usuarioError.textContent = "";
-} else if (!/^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9]+$/.test(usuario)) {
-  usuarioError.textContent = ERROR_MESSAGES.usuario;
-  esValido = false;
-} else {
-  usuarioError.textContent = "";
-}
-
+  // Validar que se seleccionó un método de pago
+  const metodoPagoSeleccionado = radioTarjeta.checked || radioCupon.checked || radioTransferencia.checked;
   
-  // Validar contraseña
-  const contrasenia = document.getElementById("contrasenia").value;
-  const contraseniaError = document.querySelector('.js-contrasenia-error');
-  if (contrasenia.trim() === "") {
-  contraseniaError.textContent = "";
-} else if (!/^(?=(?:.*[A-Za-z]){2,})(?=(?:.*\d){2,})(?=(?:.*[!@#$%^&*()_\-+=?¿¡:;.,<>]){2,}).{8,}$/.test(contrasenia)) {
-  contraseniaError.textContent = ERROR_MESSAGES.contrasenia;
-  esValido = false;
-} else {
-  contraseniaError.textContent = "";
-}
-
   
-  // Validar confirmacion de contraseña
-  const contraseniaB = document.getElementById("contraseniaB").value;
-  const contraseniaBError = document.querySelector('.js-contraseniaB-error');
-  if (contrasenia.trim() === "" || contraseniaB.trim() === "") {
-  contraseniaBError.textContent = "";
-} else if (contrasenia !== contraseniaB) {
-  contraseniaBError.textContent = ERROR_MESSAGES.contraseniaB;
-  esValido = false;
-} else {
-  contraseniaBError.textContent = "";
-}
-
+  let camposMetodoPagoCompletos = true;
   
-  // Validar metodo de pago
-  const metodoPagoSeleccionado = document.querySelector("input[name='metodoPago']:checked");
-  if (!metodoPagoSeleccionado) {
-    esValido = false;
+  if (radioTarjeta.checked) {
+    const numeroTarjeta = document.getElementById("numeroTarjeta").value.trim();
+    const codTarjeta = document.getElementById("codTarjeta").value.trim();
+    camposMetodoPagoCompletos = numeroTarjeta !== "" && codTarjeta !== "";
   }
   
-  // Validar datos de tarjeta si está seleccionada
-  if (metodoPagoSeleccionado && metodoPagoSeleccionado.id === "tarjeta") {
-    // Validar número de tarjeta
-    const numeroTarjeta = document.getElementById("numeroTarjeta").value;
-    const numeroTarjetaError = document.getElementById('error-numeroTarjeta');
-    
-    if (!/^\d{16}$/.test(numeroTarjeta)) {
-      numeroTarjetaError.textContent = ERROR_MESSAGES.numeroTarjeta;
-      esValido = false;
-    } else {
-      // Validar último dígito según suma de los 15 anteriores
-      let suma = 0;
-      for (let i = 0; i < 15; i++) {
-        suma += parseInt(numeroTarjeta[i]);
-      }
-      const ultimoDigito = parseInt(numeroTarjeta[15]);
+  if (radioCupon.checked) {
+    const pagoFacil = document.getElementById('pago-facil').checked;
+    const rapiPago = document.getElementById('rapi-pago').checked;
+    camposMetodoPagoCompletos = pagoFacil || rapiPago;
+  }
+  
+  // Habilitar botón solo si todo está completo
+  submitBtn.disabled = !(camposBasicosCompletos && metodoPagoSeleccionado && camposMetodoPagoCompletos);
+}
+
+// Función principal de validación
+function registerValidate() {
+  const registerForm = document.getElementById('registerForm')
+  const submitBtn = registerForm.querySelector('button')
+  const messageSuccess = document.querySelector('.js-message')
+
+  
+  const radioTarjeta = document.getElementById('tarjeta');
+  const radioCupon = document.getElementById('cupon');
+  const radioTransferencia = document.getElementById('transferencia');
+
+  // eventos para la actualizacion del boton
+  document.getElementById('nombre').addEventListener('input', actualizarEstadoBoton);
+  document.getElementById('apellido').addEventListener('input', actualizarEstadoBoton);
+  document.getElementById('correo').addEventListener('input', actualizarEstadoBoton);
+  document.getElementById('usuario').addEventListener('input', actualizarEstadoBoton);
+  document.getElementById('contrasenia').addEventListener('input', actualizarEstadoBoton);
+  document.getElementById('contraseniaB').addEventListener('input', actualizarEstadoBoton);
+  
+  // Campos de tarjeta
+  document.getElementById('numeroTarjeta').addEventListener('input', actualizarEstadoBoton);
+  document.getElementById('codTarjeta').addEventListener('input', actualizarEstadoBoton);
+  
+  // Métodos de pago
+  radioTarjeta.addEventListener('change', actualizarEstadoBoton);
+  radioCupon.addEventListener('change', actualizarEstadoBoton);
+  radioTransferencia.addEventListener('change', actualizarEstadoBoton);
+  
+  // Checkboxes de cupón
+  document.getElementById('pago-facil').addEventListener('change', actualizarEstadoBoton);
+  document.getElementById('rapi-pago').addEventListener('change', actualizarEstadoBoton);
+
+  // si el usuario selecciona tarjeta
+  radioTarjeta.addEventListener('change', function() {
+    if (this.checked) { 
+      document.getElementById('pago-facil').checked = false;
+      document.getElementById('rapi-pago').checked = false;
+    }
+    actualizarEstadoBoton(); 
+  });
+
+  // si el usuario selecciona cupon de pago
+  radioCupon.addEventListener('change', function() {
+    if (this.checked) { 
       
-      if (suma % 2 === 1) { // suma impar
-        if (ultimoDigito % 2 !== 0) { // último dígito debe ser par
-          numeroTarjetaError.textContent = ERROR_MESSAGES.tarjetaPar;
-          esValido = false;
-        } else {
-          numeroTarjetaError.textContent = "";
-        }
-      } else { // suma par
-        if (ultimoDigito % 2 !== 1) { // último dígito debe ser impar
-          numeroTarjetaError.textContent = ERROR_MESSAGES.tarjetaImpar;
-          esValido = false;
-        } else {
-          numeroTarjetaError.textContent = "";
-        }
-      }
+      document.getElementById('numeroTarjeta').value = '';
+      document.getElementById('codTarjeta').value = '';
     }
-    
-    // Validar codigo de tarjeta
-    const codTarjeta = document.getElementById("codTarjeta").value;
-    const codTarjetaError = document.getElementById('error-codTarjeta');
-    
-    if (!/^\d{3}$/.test(codTarjeta)) {
-      codTarjetaError.textContent = ERROR_MESSAGES.codTarjeta;
-      esValido = false;
-    } else if (codTarjeta === "000") {
-      codTarjetaError.textContent = ERROR_MESSAGES.codTarjetaZeros;
-      esValido = false;
-    } else {
-      codTarjetaError.textContent = "";
+    actualizarEstadoBoton(); 
+  });
+
+ // si el usuario selecciona transferencia
+  radioTransferencia.addEventListener('change', function() {
+    if (this.checked) { 
+      document.getElementById('numeroTarjeta').value = '';
+      document.getElementById('codTarjeta').value = '';
+      document.getElementById('pago-facil').checked = false;
+      document.getElementById('rapi-pago').checked = false;
     }
+    actualizarEstadoBoton(); 
+  });
+
+  //se ejecuta apenas carga la pagina
+  actualizarEstadoBoton();
+
+  registerForm.addEventListener('submit', function(event){
+    event.preventDefault();
+
+    // Inputs a validar
+    const nombre = registerForm.querySelector('#nombre').value.trim();
+    const apellido = registerForm.querySelector('#apellido').value.trim();
+    const correo = registerForm.querySelector('#correo').value.trim();
+    const usuario = registerForm.querySelector('#usuario').value.trim();
+    const contrasenia = registerForm.querySelector('#contrasenia').value;
+    const contraseniaB = registerForm.querySelector('#contraseniaB').value;
+    const numeroTarjeta = registerForm.querySelector('#numeroTarjeta').value.trim();
+    const codTarjeta = registerForm.querySelector('#codTarjeta').value.trim();
+
+    // Mensajes de error
+    const nombreError = registerForm.querySelector('.js-nombre-error');
+    const apellidoError = registerForm.querySelector('.js-apellido-error');
+    const correoError = registerForm.querySelector('.js-correo-error');
+    const usuarioError = registerForm.querySelector('.js-usuario-error');
+    const contraseniaError = registerForm.querySelector('.js-contrasenia-error');
+    const contraseniaBError = registerForm.querySelector('.js-contraseniaB-error');
+    const numeroTarjetaError = registerForm.querySelector('.js-numeroTarjeta-error');
+    const codTarjetaError = registerForm.querySelector('.js-codTarjeta-error');
+    const metodoPagoError = registerForm.querySelector('.js-metodoPago-error');
+
+    // Limpiar errores
+    nombreError.textContent = "";
+    apellidoError.textContent = "";
+    correoError.textContent = "";
+    usuarioError.textContent = "";
+    contraseniaError.textContent = "";
+    contraseniaBError.textContent = "";
+    numeroTarjetaError.textContent = "";
+    codTarjetaError.textContent = "";
+    metodoPagoError.textContent = "";
+    let isFormValid = true;
+
+    // Validaciones existentes
+    if(!/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(nombre) || nombre ===  ""){
+      nombreError.textContent = ERROR_MESSAGES.nombre
+      isFormValid = false;
+    }
+
+    if(!/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(apellido) || apellido ===  ""){
+      apellidoError.textContent = ERROR_MESSAGES.apellido
+      isFormValid = false;
+    }
+
+    if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(correo) || correo === "") {
+      correoError.textContent = ERROR_MESSAGES.correo;
+      isFormValid = false;
+    }
+
+    if (!/^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9]+$/.test(usuario) || usuario === "") {
+      usuarioError.textContent = ERROR_MESSAGES.usuario;
+      isFormValid = false;
+    }
+
+    if (!/^(?=(?:.*[A-Za-z]){2,})(?=(?:.*\d){2,})(?=(?:.*[!@#$%^&*()_\-+=?¿¡:;.,<>]){2,}).{8,}$/.test(contrasenia)) {
+      contraseniaError.textContent = ERROR_MESSAGES.contrasenia;
+      isFormValid = false;
+    }
+
+    if (contrasenia !== contraseniaB || contraseniaB === "") {
+      contraseniaBError.textContent = ERROR_MESSAGES.contraseniaB;
+      isFormValid = false;
+    }
+
+    if (!radioTarjeta.checked && !radioCupon.checked && !radioTransferencia.checked) {
+      metodoPagoError.textContent = ERROR_MESSAGES.metodoPago;
+      isFormValid = false;
+    }
+
+    
+   if (radioTarjeta.checked) {
+
+  if (numeroTarjeta === "") {
+    numeroTarjetaError.textContent = "El número de tarjeta es obligatorio";
+    isFormValid = false;
+  // regex para verificar que hayan 16 numeros
+  } else if (!/^\d{16}$/.test(numeroTarjeta)) {
+    numeroTarjetaError.textContent = ERROR_MESSAGES.numeroTarjeta;
+    isFormValid = false;
   } else {
-    // Limpiar errores de tarjeta si no esta seleccionada
-    document.getElementById('error-numeroTarjeta').textContent = "";
-    document.getElementById('error-codTarjeta').textContent = "";
-  }
-  
-  // actualizar boton
-  const boton = document.getElementById("buttonConfirm");
-  const camposObligatorios = [nombre, apellido, correo, usuario, contrasenia, contraseniaB];
-  
-  if (metodoPagoSeleccionado && metodoPagoSeleccionado.id === "tarjeta") {
-    const numeroTarjeta = document.getElementById("numeroTarjeta").value;
-    const codTarjeta = document.getElementById("codTarjeta").value;
-    camposObligatorios.push(numeroTarjeta, codTarjeta);
-  }
-  
-  const camposVacios = camposObligatorios.some(campo => campo.trim() === "");
-  boton.disabled = !esValido || camposVacios || !metodoPagoSeleccionado;
-  
-  return esValido && !camposVacios && metodoPagoSeleccionado;
-}
+   
+    let suma = 0;
+    // se suman los primero 15 numeros
+    for (let i = 0; i < 15; i++) {
+      suma += parseInt(numeroTarjeta[i]);
+    }
+    let ultimoDigito = parseInt(numeroTarjeta[15]); // guardamos el ultimo digito
 
-// Función para guardar en localStorage
-function guardarUsuario() {
-  if (!loginValidate()) {
-    alert("No se pueden guardar los datos. Hay errores en el formulario.");
-    return false;
+    // Si la suma es par, el último dígito debe ser impar
+    if (suma % 2 === 0 && ultimoDigito % 2 === 0) {
+      numeroTarjetaError.textContent = ERROR_MESSAGES.tarjetaImpar;
+      isFormValid = false;
+    // Si la suma es impar, el último dígito debe ser par
+    } else if (suma % 2 === 1 && ultimoDigito % 2 === 1) {
+      numeroTarjetaError.textContent = ERROR_MESSAGES.tarjetaPar;
+      isFormValid = false;
+    }
   }
-  
-  const nuevoUsuario = {
-    nombre: document.getElementById("nombre").value,
-    apellido: document.getElementById("apellido").value,
-    correo: document.getElementById("correo").value,
-    usuario: document.getElementById("usuario").value,
-    contrasenia: document.getElementById("contrasenia").value
-  };
-  
-  // Obtener usuarios existentes
-  let usuarios = [];
-  const usuariosGuardados = localStorage.getItem("usuarios");
-  if (usuariosGuardados) {
-    usuarios = JSON.parse(usuariosGuardados);
-  }
-  
-  // Verificar si el usuario ya existe
-  const usuarioExistente = usuarios.some(usuario => 
-    usuario.usuario === nuevoUsuario.usuario || usuario.correo === nuevoUsuario.correo
-  );
-  
-  if (usuarioExistente) {
-    alert("El nombre de usuario o el correo ya están registrados.");
-    return false;
-  }
-  
-  // Guardar nuevo usuario
-  usuarios.push(nuevoUsuario);
-  localStorage.setItem("usuarios", JSON.stringify(usuarios));
-  alert("Usuario registrado con éxito");
-  return true;
-}
 
-// Event listeners
-document.addEventListener("DOMContentLoaded", function() {
-  // Validar en tiempo real mientras se escribe
-  const campos = ["nombre", "apellido", "correo", "usuario", "contrasenia", "contraseniaB", "numeroTarjeta", "codTarjeta"];
-  
-  campos.forEach(campo => {
-    const elemento = document.getElementById(campo);
-    if (elemento) {
-      elemento.addEventListener("input", loginValidate);
+      // validamos codigo de la tarjeta
+      if (!/^\d{3}$/.test(codTarjeta)) {
+        codTarjetaError.textContent = ERROR_MESSAGES.codTarjeta;
+        isFormValid = false;
+      
+      } else if (codTarjeta === "000") {
+        codTarjetaError.textContent = ERROR_MESSAGES.codTarjetaZeros;
+        isFormValid = false;
+      }
+    }
+
+   
+    if (radioCupon.checked) {
+     
+      const pagoFacil = document.getElementById('pago-facil').checked;
+      const rapiPago = document.getElementById('rapi-pago').checked;
+      if (!pagoFacil && !rapiPago) {
+        metodoPagoError.textContent = "Debe seleccionar al menos un tipo de cupón";
+        isFormValid = false;
+      }
+    }
+
+    if (isFormValid) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Sending...";
+
+      // Verificar si el usuario o correo ya existe
+      const usuariosGuardados = JSON.parse(localStorage.getItem("usuarios")) || [];
+      const usuarioYaExiste = usuariosGuardados.some(function (usuarioGuardado) {
+        return usuarioGuardado.usuario === usuario || usuarioGuardado.correo === correo;
+      });
+
+      if (usuarioYaExiste) {
+        messageSuccess.textContent = "";
+        usuarioError.textContent = "Este nombre de usuario ya está registrado.";
+        correoError.textContent = "Este nombre de correo ya está registrado.";
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Confirmar";
+        return;
+      }
+
+      // determinamos metodo de pago
+      let metodoPago = "";
+      if (radioTarjeta.checked) {
+        metodoPago = "Tarjeta de crédito";
+      } else if (radioCupon.checked) {
+        metodoPago = "Cupón de pago";
+      } else if (radioTransferencia.checked) {
+        metodoPago = "Transferencia bancaria";
+      }
+
+      // creamos objeto de usuario
+      const usuarioData = {
+        nombre,
+        apellido,
+        correo,
+        usuario,
+        contrasenia,
+        metodoPago
+      };
+
+      
+      if (radioTarjeta.checked) {
+        usuarioData.numeroTarjeta = numeroTarjeta;
+        usuarioData.codTarjeta = codTarjeta;
+      }
+
+      
+      if (radioCupon.checked) {
+        usuarioData.tipoCupon = [];
+        if (document.getElementById("pago-facil").checked) {
+          usuarioData.tipoCupon.push("Pago Fácil");
+        }
+        if (document.getElementById("rapi-pago").checked) {
+          usuarioData.tipoCupon.push("RapiPago");
+        }
+      }
+
+     
+      usuariosGuardados.push(usuarioData);
+      localStorage.setItem("usuarios", JSON.stringify(usuariosGuardados));
+
+      setTimeout(function () {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Confirmar";
+        messageSuccess.textContent = "Usuario registrado";
+        registerForm.reset(); 
+        actualizarEstadoBoton(); 
+         window.location.href = "../index.html";
+      }, 1000);
     }
   });
-  
-  // Validar cuando cambia el método de pago
-  const opcionesMetodoPago = document.querySelectorAll("input[name='metodoPago']");
-  opcionesMetodoPago.forEach(opcion => {
-    opcion.addEventListener("change", function() {
-      // Limpiar campos de tarjeta si no está seleccionada
-      if (opcion.id !== "tarjeta") {
-        document.getElementById("numeroTarjeta").value = "";
-        document.getElementById("codTarjeta").value = "";
-      }
-      loginValidate();
-    });
-  });
-  
-  // Botón de confirmación
-  document.getElementById("buttonConfirm").addEventListener("click", guardarUsuario);
-  
-  // Envío del formulario
-  const formulario = document.querySelector(".primary__main__form");
-  if (formulario) {
-    formulario.addEventListener("submit", function(event) {
-      if (!loginValidate()) {
-        event.preventDefault();
-        alert("Por favor, corregí los errores antes de enviar el formulario");
-      }
-    });
-  }
-  
- 
-});
-loginValidate();
+}
+registerValidate();
