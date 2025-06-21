@@ -18,17 +18,19 @@ function actualizarEstadoBoton() {
   const registerForm = document.getElementById('registerForm');
   const submitBtn = registerForm.querySelector('button');
 
-  // se obtienen todos los campos y los metodos de pago
-  const nombre = document.getElementById("nombre").value.trim();
-  const apellido = document.getElementById("apellido").value.trim();
-  const correo = document.getElementById("correo").value.trim();
-  const usuario = document.getElementById("usuario").value.trim();
-  const contrasenia = document.getElementById("contrasenia").value.trim();
-  const contraseniaB = document.getElementById("contraseniaB").value.trim();
+  // se obtienen todos los campos desde el formulario (más organizado)
+  const nombre = registerForm.querySelector('#nombre').value.trim();
+  const apellido = registerForm.querySelector('#apellido').value.trim();
+  const correo = registerForm.querySelector('#correo').value.trim();
+  const usuario = registerForm.querySelector('#usuario').value.trim();
+  const contrasenia = registerForm.querySelector('#contrasenia').value.trim();
+  const contraseniaB = registerForm.querySelector('#contraseniaB').value.trim();
 
-  const radioTarjeta = document.getElementById('tarjeta');
-  const radioCupon = document.getElementById('cupon');
-  const radioTransferencia = document.getElementById('transferencia');
+  // también obtenemos los radios desde el formulario (queda más congruente con el resto del código)
+  const radioTarjeta = registerForm.querySelector('#tarjeta');
+  const radioCupon = registerForm.querySelector('#cupon');
+  const radioTransferencia = registerForm.querySelector('#transferencia');
+
 
   //validar que los campos no esten vacios
   const camposBasicosCompletos = nombre !== "" && apellido !== "" && correo !== "" &&
@@ -41,14 +43,14 @@ function actualizarEstadoBoton() {
   let camposMetodoPagoCompletos = true;
 
   if (radioTarjeta.checked) {
-    const numeroTarjeta = document.getElementById("numeroTarjeta").value.trim();
-    const codTarjeta = document.getElementById("codTarjeta").value.trim();
+    const numeroTarjeta = registerForm.querySelector("#numeroTarjeta").value.trim();
+    const codTarjeta = registerForm.querySelector("#codTarjeta").value.trim();
     camposMetodoPagoCompletos = numeroTarjeta !== "" && codTarjeta !== "";
   }
 
   if (radioCupon.checked) {
-    const pagoFacil = document.getElementById('pago-facil').checked;
-    const rapiPago = document.getElementById('rapi-pago').checked;
+    const pagoFacil = registerForm.querySelector('#pago-facil').checked;
+    const rapiPago = registerForm.querySelector('#rapi-pago').checked;
     camposMetodoPagoCompletos = pagoFacil || rapiPago;
   }
 
