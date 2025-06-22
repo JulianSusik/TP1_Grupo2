@@ -26,7 +26,7 @@ function actualizarEstadoBoton() {
   const contrasenia = registerForm.querySelector('#contrasenia').value.trim();
   const contraseniaB = registerForm.querySelector('#contraseniaB').value.trim();
 
-  // también obtenemos los radios desde el formulario (queda más congruente con el resto del código)
+  // también obtenemos los radios desde el formulario 
   const radioTarjeta = registerForm.querySelector('#tarjeta');
   const radioCupon = registerForm.querySelector('#cupon');
   const radioTransferencia = registerForm.querySelector('#transferencia');
