@@ -90,6 +90,25 @@ function registerValidate() {
   document.getElementById('pago-facil').addEventListener('change', actualizarEstadoBoton);
   document.getElementById('rapi-pago').addEventListener('change', actualizarEstadoBoton);
 
+  document.getElementById('pago-facil').addEventListener('change', function () {
+    if (this.checked) {
+      radioTarjeta.checked = false;
+      radioTransferencia.checked = false;
+      document.getElementById('numeroTarjeta').value = '';
+      document.getElementById('codTarjeta').value = '';
+    }
+    actualizarEstadoBoton();
+  });
+
+  document.getElementById('rapi-pago').addEventListener('change', function () {
+    if (this.checked) {
+      radioTarjeta.checked = false;
+      radioTransferencia.checked = false;
+      document.getElementById('numeroTarjeta').value = '';
+      document.getElementById('codTarjeta').value = '';
+    }
+    actualizarEstadoBoton();
+  });
   // si el usuario selecciona tarjeta
   radioTarjeta.addEventListener('change', function () {
     if (this.checked) {
