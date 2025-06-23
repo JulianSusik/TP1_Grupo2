@@ -25,26 +25,31 @@ document.querySelector(".form").addEventListener("submit", function (event) {
     const contraseniaValida = /^(?=(?:.*[A-Za-z]){2,})(?=(?:.*\d){2,})(?=(?:.*[!@#$%^&*()_\-+=?¿¡:;.,<>]){2,}).{8,}$/;
     const mensajeError1 = document.querySelector("#mensaje-error-js");
     const mensajeError2 = document.querySelector("#mensaje-errorb-js");
+    const quiereCambiarContrasenia = contraseniaNueva !== "" || contraseniaRepetida !== "";
+    if(quiereCambiarContrasenia){
+        if (!contraseniaValida.test(contraseniaNueva)) {
+            event.preventDefault();
+            mensajeError1.innerHTML = "La contraseña debe tener al menos 8 caracteres, 2 letras, 2 números y 2 símbolos";
+            mensajeError1.style.color = "red";
+        } else {
+            mensajeError1.innerHTML = "";
+        }
 
-    if (!contraseniaValida.test(contraseniaNueva)) {
-        event.preventDefault();
-        mensajeError1.innerHTML = "La contraseña debe tener al menos 8 caracteres, 2 letras, 2 números y 2 símbolos";
-        mensajeError1.style.color = "red";
-    } else {
-        mensajeError1.innerHTML = "";
-    }
-    if (contraseniaRepetida !== contraseniaNueva) {
-        event.preventDefault();
-        mensajeError2.innerHTML = "la contraseña no coincide";
-        mensajeError2.style.color = "red";
-    } else {
-        mensajeError2.innerHTML = "";
+        if (contraseniaRepetida !== contraseniaNueva) {
+            event.preventDefault();
+            mensajeError2.innerHTML = "la contraseña no coincide";
+            mensajeError2.style.color = "red";
+        } else {
+            mensajeError2.innerHTML = "";
+        }
     }
     if (contraseniaRepetida === contraseniaNueva && contraseniaValida.test(contraseniaNueva)) {
         let usuarios = JSON.parse(localStorage.getItem("usuarios"));
         let usuarioBuscado = usuarios.find(
             (user) => user.usuario === usuarioActual.usuario);
-            usuarioBuscado.contrasenia = contraseniaNueva;
+            if (quiereCambiarContrasenia) {
+                usuarioBuscado.contrasenia = contraseniaNueva;
+            }
             localStorage.setItem("usuarios", JSON.stringify(usuarios));
             usuarioBuscado.contrasenia = contraseniaNueva;
             localStorage.setItem("usuarios", JSON.stringify(usuarios));
