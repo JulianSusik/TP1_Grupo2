@@ -2,7 +2,7 @@ const SERIES_Y_PELICULAS = JSON.parse(localStorage.getItem("seriesYPeliculas"));
 const cerrarSesion = document.querySelector(".cerrar-sesion");
 const usuarioActual = JSON.parse(localStorage.getItem("usuarioActivo")); //agarramos el usuario activo
 const confirmarCambios = document.querySelector(".confirmar-cambios__js");
-//email-js
+
 
 cerrarSesion.addEventListener("click", function () {
     localStorage.removeItem("usuarioActivo");
@@ -71,6 +71,31 @@ document.querySelector(".boton-cancelar-js").addEventListener("click", function(
     eliminarUsuario ();
 })
 
+function mostrarMetodoDePago (){
+    const RadioTarjeta = document.querySelector("#tarjeta-credito");
+    const radioCupon = document.querySelector("#cupon");
+    if (usuarioActual.metodoPago === "Tarjeta de crédito"){
+        RadioTarjeta.checked = true;
+        let campoTarjeta = document.querySelector("#campo-texto-tarjeta");
+        campoTarjeta.placeholder = usuarioActual.numeroTarjeta;
+    }
+    if (usuarioActual.metodoPago === "Cupón de pago"){
+        radioCupon.checked = true;
+        if (usuarioActual.tipoCupon[0] === "Pago Fácil"){  //Pongo el 0 para que se fije en la primera posicion del array
+            let checkboxPagoFacil = document.querySelector("#PF").checked = true;
+        }
+        if (usuarioActual.tipoCupon[0] === "RapiPago"){  //Pongo el 0 para que se fije en la primera posicion del array
+            let checkboxPagoFacil = document.querySelector("#RP").checked = true;
+        }
+    }
+    if (usuarioActual.metodoPago === "Transferencia bancaria"){
+        const TransferenciaBancaria = document.querySelector("#Transferencia").checked = true;
+    }
+}
+
+mostrarMetodoDePago();
+
+// ---------------------------------------------------------
 
 function inicializarCarrusel(idCarrusel, items) {//Crea el mismo carrusel que hay en serie-pelicula.html. Pasando por parametro el id del html carrusel  y los items que debe colocar dentro
     const carruselElement = document.getElementById(idCarrusel);
