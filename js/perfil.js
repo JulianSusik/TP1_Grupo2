@@ -84,10 +84,10 @@ document.querySelector(".form").addEventListener("submit", function (event) {
                 cuponError.textContent = "Debe seleccionar al menos un tipo de cupón"
             }
             if (checkboxPF.checked){
-                usuarioAuxiliar.tipoCupon = "Pago Fácil"
+                usuarioAuxiliar.tipoCupon = ["Pago Fácil"];
             }
             if(checkboxRP.checked){
-                usuarioAuxiliar.tipoCupon = "RapiPago"
+                usuarioAuxiliar.tipoCupon = ["RapiPago"];
             }
         }
         if (metodoPagoSeleccionado === "Transferencia bancaria"){
