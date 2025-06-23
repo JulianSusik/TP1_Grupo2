@@ -2,6 +2,11 @@ const SERIES_Y_PELICULAS = JSON.parse(localStorage.getItem("seriesYPeliculas"));
 const cerrarSesion = document.querySelector(".cerrar-sesion");
 const usuarioActual = JSON.parse(localStorage.getItem("usuarioActivo")); //agarramos el usuario activo
 const confirmarCambios = document.querySelector(".confirmar-cambios__js");
+const mensajeError1 = document.querySelector("#mensaje-error-js");
+const mensajeError2 = document.querySelector("#mensaje-errorb-js");
+const numeroTarjetaError = document.querySelector(".numero-tarjeta-error-js");
+const codigoTarjetaError = document.querySelector(".codigo-tarjeta-error-js");
+const cuponError = document.querySelector(".cupon-error");
 
 
 cerrarSesion.addEventListener("click", function () {
@@ -20,12 +25,68 @@ textoUsuario.textContent = nombreUsuarioActual; // hacemos que aparezca en panta
 
 // --- guardar los cambios del usuario ---
 document.querySelector(".form").addEventListener("submit", function (event) {
+    event.preventDefault();
     const contraseniaNueva = document.querySelector("#contraseña-nueva").value;
     const contraseniaRepetida = document.querySelector("#repetir-contraseña").value;
     const contraseniaValida = /^(?=(?:.*[A-Za-z]){2,})(?=(?:.*\d){2,})(?=(?:.*[!@#$%^&*()_\-+=?¿¡:;.,<>]){2,}).{8,}$/;
-    const mensajeError1 = document.querySelector("#mensaje-error-js");
-    const mensajeError2 = document.querySelector("#mensaje-errorb-js");
     const quiereCambiarContrasenia = contraseniaNueva !== "" || contraseniaRepetida !== "";
+    const campoTarjeta = document.querySelector("#campo-texto-tarjeta");
+    const codigoTarjeta = document.querySelector("#codigo-texto-tarjeta");
+    const metodoPagoSeleccionado = document.querySelector('input[name="opcion-pago"]:checked')?.value;
+    const quiereCambiarMetodoPago = metodoPagoSeleccionado !== usuarioActual.metodoPago;
+    const usuarioAuxiliar = usuarioActual;
+
+    cuponError.textContent = ""
+    numeroTarjetaError.textContent = ""
+    codigoTarjetaError.textContent = ""
+
+    // parte metodo de pago
+    if (quiereCambiarMetodoPago){
+        usuarioAuxiliar.metodoPago = metodoPagoSeleccionado;
+        if (metodoPagoSeleccionado === "Tarjeta de crédito"){
+            if (!/^\d{16}$/.test(campoTarjeta)) {
+                event.preventDefault();
+                numeroTarjetaError.textContent = "El numero de tarjeta debe contener exactamente 16 dígitos";
+            } else {
+                let suma = 0;
+                for (let i = 0; i < 15; i++) {
+                    suma += parseInt(campoTarjeta[i]);
+                }
+                let ultimoDigito = parseInt(campoTarjeta[15]);
+
+                if (suma % 2 === 0 && ultimoDigito % 2 === 0) {
+                    event.preventDefault();
+                    numeroTarjetaError.textContent = "El último dígito debe ser impar (la suma de los anteriores es par)";
+                } else if (suma % 2 === 1 && ultimoDigito % 2 === 1) {
+                    event.preventDefault();
+                    numeroTarjetaError.textContent = "El último dígito debe ser par (la suma de los anteriores es impar)";
+                }
+                usuarioAuxiliar.numeroTarjeta = campoTarjeta;
+            }
+            if (!/^\d{3}$/.test(codigoTarjeta)) {
+                event.preventDefault();
+                codigoTarjetaError.textContent = "El Codigo de seguridad debe contener exactamente 3 números"
+            } else if (codigoTarjeta === "000") {
+                event.preventDefault();
+                codigoTarjetaError.textContent = "La clave no puede ser 000";
+            } else{
+                usuarioAuxiliar.codTarjeta = codigoTarjeta;
+            }
+        }
+        if (metodoPagoSeleccionado === "Cupón de pago"){
+            const checkboxPF= document.querySelector("#PF");
+            const checkboxRP = document.querySelector("#RP");
+            if (checkboxPF.checked === false && checkboxRP.checked === false){
+                event.preventDefault();
+                cuponError.textContent = "Debe seleccionar al menos un tipo de cupón"
+            } else if (checkboxPF.checked){
+                usuarioAuxiliar.tipoCupon[0] = "Pago Fácil"
+            }
+            usuarioAuxiliar.tipoCupon[0] = "RapiPago"
+        }
+    }
+
+    // parte contraseña
     if(quiereCambiarContrasenia){
         if (!contraseniaValida.test(contraseniaNueva)) {
             event.preventDefault();
@@ -43,20 +104,25 @@ document.querySelector(".form").addEventListener("submit", function (event) {
             mensajeError2.innerHTML = "";
         }
     }
+
+    let usuarios = JSON.parse(localStorage.getItem("usuarios"));
+    let usuarioBuscado = usuarios.find(
+        (user) => user.usuario === usuarioActual.usuario);
+        
     if (contraseniaRepetida === contraseniaNueva && contraseniaValida.test(contraseniaNueva)) {
-        let usuarios = JSON.parse(localStorage.getItem("usuarios"));
-        let usuarioBuscado = usuarios.find(
-            (user) => user.usuario === usuarioActual.usuario);
-            if (quiereCambiarContrasenia) {
-                usuarioBuscado.contrasenia = contraseniaNueva;
-            }
-            localStorage.setItem("usuarios", JSON.stringify(usuarios));
+        if (quiereCambiarContrasenia) {
             usuarioBuscado.contrasenia = contraseniaNueva;
-            localStorage.setItem("usuarios", JSON.stringify(usuarios));
             usuarioActual.contrasenia = contraseniaNueva;
-            localStorage.setItem("usuarioActivo", JSON.stringify(usuarioActual));
+        }
     }
-    
+    if (quiereCambiarMetodoPago){
+        usuarioBuscado.metodoPago = usuarioAuxiliar.metodoPago;
+        usuarioBuscado.tipoCupon = usuarioAuxiliar.tipoCupon;
+        usuarioBuscado.numeroTarjeta = usuarioAuxiliar.numeroTarjeta;
+        usuarioBuscado.codTarjeta = usuarioAuxiliar.codTarjeta;
+    }
+    localStorage.setItem("usuarios", JSON.stringify(usuarios));
+    localStorage.setItem("usuarioActivo", JSON.stringify(usuarioActual));
 
 })
 
@@ -81,20 +147,20 @@ function mostrarMetodoDePago (){
     const radioCupon = document.querySelector("#cupon");
     if (usuarioActual.metodoPago === "Tarjeta de crédito"){
         RadioTarjeta.checked = true;
-        let campoTarjeta = document.querySelector("#campo-texto-tarjeta");
+        const campoTarjeta = document.querySelector("#campo-texto-tarjeta");
         campoTarjeta.placeholder = usuarioActual.numeroTarjeta;
     }
     if (usuarioActual.metodoPago === "Cupón de pago"){
         radioCupon.checked = true;
         if (usuarioActual.tipoCupon[0] === "Pago Fácil"){  //Pongo el 0 para que se fije en la primera posicion del array
-            let checkboxPagoFacil = document.querySelector("#PF").checked = true;
+            const checkboxPagoFacil = document.querySelector("#PF").checked = true;
         }
         if (usuarioActual.tipoCupon[0] === "RapiPago"){  //Pongo el 0 para que se fije en la primera posicion del array
-            let checkboxPagoFacil = document.querySelector("#RP").checked = true;
+            const checkboxRapiPago = document.querySelector("#RP").checked = true;
         }
     }
     if (usuarioActual.metodoPago === "Transferencia bancaria"){
-        const TransferenciaBancaria = document.querySelector("#Transferencia").checked = true;
+        const transferenciaBancaria = document.querySelector("#Transferencia").checked = true;
     }
 }
 
