@@ -72,17 +72,25 @@ document.querySelector(".form").addEventListener("submit", function (event) {
             } else{
                 usuarioAuxiliar.codTarjeta = codigoTarjeta;
             }
+            usuarioAuxiliar.tipoCupon = [];
         }
         if (metodoPagoSeleccionado === "Cupón de pago"){
             const checkboxPF= document.querySelector("#PF");
             const checkboxRP = document.querySelector("#RP");
+            usuarioAuxiliar.numeroTarjeta = "";
+            usuarioAuxiliar.codTarjeta = "";
             if (checkboxPF.checked === false && checkboxRP.checked === false){
                 event.preventDefault();
                 cuponError.textContent = "Debe seleccionar al menos un tipo de cupón"
             } else if (checkboxPF.checked){
-                usuarioAuxiliar.tipoCupon[0] = "Pago Fácil"
+                usuarioAuxiliar.tipoCupon = "Pago Fácil"
             }
-            usuarioAuxiliar.tipoCupon[0] = "RapiPago"
+            usuarioAuxiliar.tipoCupon = "RapiPago"
+        }
+        if (metodoPagoSeleccionado === "Transferencia bancaria"){
+            usuarioAuxiliar.numeroTarjeta = "";
+            usuarioAuxiliar.codTarjeta = "";
+            usuarioAuxiliar.tipoCupon = null;
         }
     }
 
@@ -123,6 +131,7 @@ document.querySelector(".form").addEventListener("submit", function (event) {
     }
     localStorage.setItem("usuarios", JSON.stringify(usuarios));
     localStorage.setItem("usuarioActivo", JSON.stringify(usuarioActual));
+    console.log(usuarioBuscado)
 
 })
 
