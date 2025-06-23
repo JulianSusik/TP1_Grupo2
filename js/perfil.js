@@ -82,10 +82,13 @@ document.querySelector(".form").addEventListener("submit", function (event) {
             if (checkboxPF.checked === false && checkboxRP.checked === false){
                 event.preventDefault();
                 cuponError.textContent = "Debe seleccionar al menos un tipo de cupón"
-            } else if (checkboxPF.checked){
+            }
+            if (checkboxPF.checked){
                 usuarioAuxiliar.tipoCupon = "Pago Fácil"
             }
-            usuarioAuxiliar.tipoCupon = "RapiPago"
+            if(checkboxRP.checked){
+                usuarioAuxiliar.tipoCupon = "RapiPago"
+            }
         }
         if (metodoPagoSeleccionado === "Transferencia bancaria"){
             usuarioAuxiliar.numeroTarjeta = "";
