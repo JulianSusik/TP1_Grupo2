@@ -138,6 +138,8 @@ document.querySelector(".form").addEventListener("submit", function (event) {
         usuarioActual.tipoCupon = usuarioAuxiliar.tipoCupon;
         usuarioActual.numeroTarjeta = usuarioAuxiliar.numeroTarjeta;
         usuarioActual.codTarjeta = usuarioAuxiliar.codTarjeta;
+        usuarioBuscado.numeroTarjeta = usuarioAuxiliar.numeroTarjeta;
+        usuarioActual.numeroTarjeta = usuarioAuxiliar.numeroTarjeta;
     }
     localStorage.setItem("usuarios", JSON.stringify(usuarios));
     localStorage.setItem("usuarioActivo", JSON.stringify(usuarioActual));
