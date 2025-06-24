@@ -102,15 +102,17 @@
                 <div class="perfil__metodo-pago">
                     <h4>Método de pago</h4>
                     <div class="perfil__metodo-pago_tipo">
-                        <input type="radio" name="opcion-pago" id="tarjeta-credito">
+                        <input type="radio" name="opcion-pago" id="tarjeta-credito" value="Tarjeta de crédito">
                         <label for="tarjeta-credito">Tarjeta de crédito</label>
                         <div class="flex-row perfil__metodo-pago_tipo-credito">
-                            <input type="text" name="Numero de tarjeta" placeholder="Numero de tarjeta" id="">
-                            <input type="text" name="codigo" id="codigo" inputmode="numeric" placeholder="XXX"
+                            <input type="text" name="Numero de tarjeta" placeholder="Numero de tarjeta" id="campo-texto-tarjeta">
+                            <input type="text" name="codigo" id="codigo" inputmode="numeric" placeholder="XXX" id="codigo-texto-tarjeta"
                                 pattern="\d{3}" maxlength="3">
                         </div>
+                        <p class="mensaje-error numero-tarjeta-error-js"></p>
+                        <p class="mensaje-error codigo-tarjeta-error-js"></p>
 
-                        <input type="radio" name="opcion-pago" id="cupon">
+                        <input type="radio" name="opcion-pago" id="cupon" value="Cupón de pago">
                         <label for="cupon">Cupón de pago</label>
                         <div class="flex-row perfil__metodo-pago_tipo-cupon">
                             <input type="checkbox" name="cupon" id="PF">
@@ -118,8 +120,9 @@
                             <input type="checkbox" name="cupon" id="RP">
                             <label for="RP">RapiPago</label>
                         </div>
+                        <p class="mensaje-error cupon-error"></p>
 
-                        <input type="radio" name="opcion-pago" id="Transferencia">
+                        <input type="radio" name="opcion-pago" id="Transferencia" value="Transferencia bancaria">
                         <label for="Transferencia">Transferencia bancaria</label>
                         <p>CBU: 201009098598929950 </p>
                     </div>

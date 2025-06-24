@@ -41,6 +41,10 @@ body {
     justify-content: space-evenly;
 
 }
+.mensaje-error{
+    color: red;
+    font-size: 11px;
+}
 
 .perfil__avatar {
     width: 8%;
