@@ -25,10 +25,10 @@ textoUsuario.textContent = nombreUsuarioActual; // hacemos que aparezca en panta
 
 
 // --- guardar los cambios del usuario ---
-document.querySelector(".form").addEventListener("submit", function (event) {    
+document.querySelector(".form").addEventListener("submit", function (event) {
     event.preventDefault();
 
-    let huboError = false;
+
     const contraseniaNueva = document.querySelector("#contraseña-nueva").value;
     const contraseniaRepetida = document.querySelector("#repetir-contraseña").value;
     const contraseniaValida = /^(?=(?:.*[A-Za-z]){2,})(?=(?:.*\d){2,})(?=(?:.*[!@#$%^&*()_\-+=?¿¡:;.,<>]){2,}).{8,}$/;
@@ -42,7 +42,9 @@ document.querySelector(".form").addEventListener("submit", function (event) {
     const cuponSeleccionado = checkboxPF.checked ? "Pago Fácil" : (checkboxRP.checked ? "RapiPago" : null);
     const cuponAnterior = usuarioActual.tipoCupon?.[0] || null;
     const quiereCambiarTipoCupon = metodoPagoSeleccionado === "Cupón de pago" && cuponSeleccionado !== cuponAnterior;
+    const numeroTarjetaAnterior = usuarioActual.numeroTarjeta || "";
     const quiereCambiarNumeroTarjeta = campoTarjeta.value !== numeroTarjetaAnterior
+
     const usuarioAuxiliar = usuarioActual;
 
 
@@ -55,26 +57,27 @@ document.querySelector(".form").addEventListener("submit", function (event) {
         usuarioAuxiliar.metodoPago = metodoPagoSeleccionado;
         if (metodoPagoSeleccionado === "Tarjeta de crédito") {
             if (!/^\d{16}$/.test(campoTarjeta.value)) {
-    event.preventDefault();
-    numeroTarjetaError.textContent = "El número de tarjeta debe contener exactamente 16 dígitos";
-} else {
-    let suma = 0;
-    for (let i = 0; i < 15; i++) {
-        suma += parseInt(campoTarjeta.value[i]);
-    }
-    let ultimoDigito = parseInt(campoTarjeta.value[15]);
+                event.preventDefault();
+                numeroTarjetaError.textContent = "El número de tarjeta debe contener exactamente 16 dígitos";
+            } else {
+                let suma = 0;
+                for (let i = 0; i < 15; i++) {
+                    suma += parseInt(campoTarjeta.value[i]);
+                }
+                let ultimoDigito = parseInt(campoTarjeta.value[15]);
 
-    if (suma % 2 === 0 && ultimoDigito % 2 === 0) {
-        event.preventDefault();
-        numeroTarjetaError.textContent = "El último dígito debe ser impar (la suma de los anteriores es par)";
-    } else if (suma % 2 === 1 && ultimoDigito % 2 === 1) {
-        event.preventDefault();
-        numeroTarjetaError.textContent = "El último dígito debe ser par (la suma de los anteriores es impar)";
-    } else {
-        numeroTarjetaError.textContent = "";
-        usuarioAuxiliar.numeroTarjeta = campoTarjeta.value; // ✅ AHORA SE GUARDA CORRECTAMENTE
-    }
-}
+                if (suma % 2 === 0 && ultimoDigito % 2 === 0) {
+                    event.preventDefault();
+                    numeroTarjetaError.textContent = "El último dígito debe ser impar (la suma de los anteriores es par)";
+                } else if (suma % 2 === 1 && ultimoDigito % 2 === 1) {
+                    event.preventDefault();
+                    numeroTarjetaError.textContent = "El último dígito debe ser par (la suma de los anteriores es impar)";
+                } else {
+                    numeroTarjetaError.textContent = "";
+                    usuarioAuxiliar.numeroTarjeta = campoTarjeta.value; // ✅ AHORA SE GUARDA CORRECTAMENTE
+                    usuarioAuxiliar.numeroTarjeta = campoTarjeta.value;
+                }
+            }
             usuarioAuxiliar.tipoCupon = [];
         }
         if (metodoPagoSeleccionado === "Cupón de pago") {
@@ -140,13 +143,14 @@ document.querySelector(".form").addEventListener("submit", function (event) {
         usuarioActual.codTarjeta = usuarioAuxiliar.codTarjeta;
         usuarioBuscado.numeroTarjeta = usuarioAuxiliar.numeroTarjeta;
         usuarioActual.numeroTarjeta = usuarioAuxiliar.numeroTarjeta;
+
     }
     localStorage.setItem("usuarios", JSON.stringify(usuarios));
     localStorage.setItem("usuarioActivo", JSON.stringify(usuarioActual));
     console.log(usuarioBuscado)
 
 })
-
+console.log(JSON.parse(localStorage.getItem("usuarioActivo")).numeroTarjeta);
 
 mostrarMetodoDePago();
 
@@ -233,21 +237,21 @@ document.querySelectorAll('input[type="checkbox"][name="cupon"]').forEach((check
 });
 
 document.querySelectorAll('input[name="opcion-pago"]').forEach(radio => {//El forEach se ejecuta constantemente
-  radio.addEventListener('change', () => {//Si el radio button cambia
-    const metodoSeleccionado = radio.value;//Se toma el metodo seleccionado
-    if (metodoSeleccionado !== "Cupón de pago") {
-      document.querySelectorAll('input[name="cupon"]').forEach(cb => cb.checked = false);
-    }//Si el metodo seleccionado es distinto de cupon de pago, se marca el radio button como false
+    radio.addEventListener('change', () => {//Si el radio button cambia
+        const metodoSeleccionado = radio.value;//Se toma el metodo seleccionado
+        if (metodoSeleccionado !== "Cupón de pago") {
+            document.querySelectorAll('input[name="cupon"]').forEach(cb => cb.checked = false);
+        }//Si el metodo seleccionado es distinto de cupon de pago, se marca el radio button como false
 
-    if (metodoSeleccionado !== "Tarjeta de crédito") {//Si el metodo es distinto de tarjeta de credito, se vacian los campos
-      const campoTarjeta = document.querySelector("#campo-texto-tarjeta");
-      const codigoTarjeta = document.querySelector("#codigo-texto-tarjeta");
-      if (campoTarjeta) campoTarjeta.value = "";
-      if (codigoTarjeta) codigoTarjeta.value = "";
-    }
+        if (metodoSeleccionado !== "Tarjeta de crédito") {//Si el metodo es distinto de tarjeta de credito, se vacian los campos
+            const campoTarjeta = document.querySelector("#campo-texto-tarjeta");
+            const codigoTarjeta = document.querySelector("#codigo-texto-tarjeta");
+            if (campoTarjeta) campoTarjeta.value = "";
+            if (codigoTarjeta) codigoTarjeta.value = "";
+        }
 
-    cuponError.textContent = "";
-    numeroTarjetaError.textContent = "";
-    codigoTarjetaError.textContent = "";
-  });
+        cuponError.textContent = "";
+        numeroTarjetaError.textContent = "";
+        codigoTarjetaError.textContent = "";
+    });
 });
