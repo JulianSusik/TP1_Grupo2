@@ -154,6 +154,21 @@ console.log(JSON.parse(localStorage.getItem("usuarioActivo")).numeroTarjeta);
 
 mostrarMetodoDePago();
 
+//--- eliminar usuario del LocalStorage ---
+function eliminarUsuario (){
+    let usuarios = JSON.parse(localStorage.getItem("usuarios"));
+    let usuarioActual = JSON.parse(localStorage.getItem("usuarioActivo"));
+    let nuevosUsuarios = usuarios.filter(function(user){
+        return user.usuario != usuarioActual.usuario;
+    })
+    localStorage.setItem("usuarios", JSON.stringify(nuevosUsuarios))
+    localStorage.removeItem("usuarioActivo")
+}
+
+
+document.querySelector(".boton-cancelar-js").addEventListener("click", function(){
+    eliminarUsuario ();
+})
 // ---------------------------------------------------------
 
 function inicializarCarrusel(idCarrusel, items) {//Crea el mismo carrusel que hay en serie-pelicula.html. Pasando por parametro el id del html carrusel  y los items que debe colocar dentro
