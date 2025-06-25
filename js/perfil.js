@@ -17,12 +17,15 @@ cerrarSesion.addEventListener("click", function () {
 // --- correo electronico y usuario dinamicamente ---
 let textoEmail = document.querySelector(".email-js");
 let textoUsuario = document.querySelector(".usuario-js");
+let textoContrasenia = document.querySelector(".contrasenia-js")
 let correoActual = usuarioActual.correo; // guardamos el correo del usuario en un let
 let nombreUsuarioActual = usuarioActual.usuario; // guardamos el nombre de usuario en un let
+let contraseniaActualB = "*".repeat(usuarioActual.contrasenia.length);
+
 
 textoEmail.textContent = correoActual;  // hacemos que aparezca en pantalla el correo en modo de texto
 textoUsuario.textContent = nombreUsuarioActual; // hacemos que aparezca en pantalla el nombre del usuario en modo de texto
-
+textoContrasenia.textContent = contraseniaActualB;
 
 // --- guardar los cambios del usuario ---
 document.querySelector(".form").addEventListener("submit", function (event) {
