@@ -283,7 +283,11 @@ document.querySelectorAll('input[name="opcion-pago"]').forEach(radio => {//El fo
         if (metodoSeleccionado !== "Tarjeta de crédito") {//Si el metodo es distinto de tarjeta de credito, se vacian los campos
             const campoTarjeta = document.querySelector("#campo-texto-tarjeta");
             const codigoTarjeta = document.querySelector("#codigo-texto-tarjeta");
-            if (campoTarjeta) campoTarjeta.value = "";
+            if (campoTarjeta) {
+                campoTarjeta.value = "";
+                campoTarjeta.placeholder="Numero de tarjeta";
+            }
+
             if (codigoTarjeta) codigoTarjeta.value = "";
         }
 
