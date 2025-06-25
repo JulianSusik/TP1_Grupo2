@@ -350,4 +350,13 @@ function registerValidate() {
     }
   });
 }
+document.querySelectorAll('input[type="checkbox"][name="tipoCupon"]').forEach((checkbox) => {//El queryselector busca el checkbox de name cupon
+  checkbox.addEventListener("change", (e) => {
+    if (e.target.checked) {//Si el target esta checkeado se ejecuta el if
+      document.querySelectorAll('input[type="checkbox"][name="tipoCupon"]').forEach((cb) => {
+        if (cb !== e.target) cb.checked = false;//Se desmarca la opcion que esta checkeada
+      });
+    }
+  });
+});
 registerValidate();
