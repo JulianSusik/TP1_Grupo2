@@ -32,10 +32,10 @@ function agregarIframeYCorazon() {
         if (userData && userData.favoritos) {
             const esFavorito = objetoVisual.tipo === "pelicula"
                 ? userData.favoritos.peliculas.includes(objetoVisual.id)
-                : userData.favoritos.series.includes(objetoVisual.id);
+                : userData.favoritos.series.includes(objetoVisual.id);//Este ternario devuelve true si no esta dentro del array marcado como favorito
 
             if (esFavorito) {
-                corazon.classList.add("favorito");
+                corazon.classList.add("favorito");//Entonces si es true lo marca como favorito
             }
         }
     }
