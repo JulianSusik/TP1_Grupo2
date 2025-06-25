@@ -33,7 +33,7 @@ formRecuperar.addEventListener("submit", function(e) {
 
   if (usuarioEncontrado) {
     alert("Se ha enviado un correo con instrucciones para restablecer su contraseña.");
-    window.location.href = "../login.html";
+    window.location.href = "../index.html";
   } else {
     alert("Correo o nombre de usuario incorrecto.");
   }
