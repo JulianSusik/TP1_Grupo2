@@ -4,13 +4,14 @@
 }
 
 body {
-    background-color: #c9c6ff;
+    background-color: #262643;
 }
 
 .primary__header {
     width: 35%;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     margin: 2em 3em;
+    color: #a59de9;
 }
 .mensaje-error {
   color: #dc3545; /* Rojo para errores */
@@ -37,6 +38,7 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1em 0;
+    color: #a59de9;
 }
 
 .primary__main__form__sectionRight {
@@ -45,6 +47,7 @@ body {
     flex-direction: column;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 1em;
+    color: #a59de9;
 }
 
 .primary__main__form__divButtons {
@@ -162,7 +165,7 @@ a {
     display: flex;
     justify-content: center;
     text-decoration: none;
-    color: inherit;
+    color: black;
     align-items: center;
     background-color: rgb(223, 50, 50);
 }

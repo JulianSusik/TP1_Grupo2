@@ -43,7 +43,9 @@ document.querySelector(".form").addEventListener("submit", function (event) {
     const cuponAnterior = usuarioActual.tipoCupon?.[0] || null;
     const quiereCambiarTipoCupon = metodoPagoSeleccionado === "Cupón de pago" && cuponSeleccionado !== cuponAnterior;
     const numeroTarjetaAnterior = usuarioActual.numeroTarjeta || "";
-    const quiereCambiarNumeroTarjeta = campoTarjeta.value !== numeroTarjetaAnterior
+    const codigoTarjetaAnterior = usuarioActual.codigoTarjeta || "";
+    const quiereCambiarNumeroTarjeta = campoTarjeta.value !== numeroTarjetaAnterior;
+    const quiereCambiarCodigoTarjeta = codigoTarjeta.value !== codigoTarjetaAnterior;
 
     const usuarioAuxiliar = usuarioActual;
 
@@ -53,7 +55,7 @@ document.querySelector(".form").addEventListener("submit", function (event) {
     codigoTarjetaError.textContent = ""
 
     // parte metodo de pago
-    if (quiereCambiarMetodoPago || quiereCambiarTipoCupon || quiereCambiarNumeroTarjeta) {
+    if (quiereCambiarMetodoPago || quiereCambiarTipoCupon || quiereCambiarNumeroTarjeta || quiereCambiarCodigoTarjeta) {
         usuarioAuxiliar.metodoPago = metodoPagoSeleccionado;
         if (metodoPagoSeleccionado === "Tarjeta de crédito") {
             if (!/^\d{16}$/.test(campoTarjeta.value)) {
@@ -74,8 +76,14 @@ document.querySelector(".form").addEventListener("submit", function (event) {
                     numeroTarjetaError.textContent = "El último dígito debe ser par (la suma de los anteriores es impar)";
                 } else {
                     numeroTarjetaError.textContent = "";
-                    usuarioAuxiliar.numeroTarjeta = campoTarjeta.value; // ✅ AHORA SE GUARDA CORRECTAMENTE
                     usuarioAuxiliar.numeroTarjeta = campoTarjeta.value;
+                }
+                if (codigoTarjeta.value === "000") {
+                    event.preventDefault();
+                    codigoTarjetaError.textContent = "El código de seguridad no puede ser 000"
+                } else {
+                    codigoTarjetaError.textContent = "";
+                    usuarioAuxiliar.codTarjeta = codigoTarjeta.value;
                 }
             }
             usuarioAuxiliar.tipoCupon = [];
@@ -130,6 +138,7 @@ document.querySelector(".form").addEventListener("submit", function (event) {
         if (quiereCambiarContrasenia) {
             usuarioBuscado.contrasenia = contraseniaNueva;
             usuarioActual.contrasenia = contraseniaNueva;
+            alert("Contraseña cambiada exitosamente");
         }
     }
     if (quiereCambiarMetodoPago || quiereCambiarTipoCupon || quiereCambiarNumeroTarjeta) {
@@ -148,16 +157,15 @@ document.querySelector(".form").addEventListener("submit", function (event) {
     localStorage.setItem("usuarios", JSON.stringify(usuarios));
     localStorage.setItem("usuarioActivo", JSON.stringify(usuarioActual));
     console.log(usuarioBuscado)
-
 })
 console.log(JSON.parse(localStorage.getItem("usuarioActivo")).numeroTarjeta);
 
 
 //--- eliminar usuario del LocalStorage ---
-function eliminarUsuario (){
+function eliminarUsuario() {
     let usuarios = JSON.parse(localStorage.getItem("usuarios"));
     let usuarioActual = JSON.parse(localStorage.getItem("usuarioActivo"));
-    let nuevosUsuarios = usuarios.filter(function(user){
+    let nuevosUsuarios = usuarios.filter(function (user) {
         return user.usuario != usuarioActual.usuario;
     })
     localStorage.setItem("usuarios", JSON.stringify(nuevosUsuarios))
@@ -165,28 +173,31 @@ function eliminarUsuario (){
 }
 
 
-document.querySelector(".boton-cancelar-js").addEventListener("click", function(){
-    eliminarUsuario (console.log("Eliminado"));
+document.querySelector(".boton-cancelar-js").addEventListener("click", function () {
+    eliminarUsuario(console.log("Eliminado"));
 })
 // ---------------------------------------------------------
-function mostrarMetodoDePago (){
+function mostrarMetodoDePago() {
     const RadioTarjeta = document.querySelector("#tarjeta-credito");
     const radioCupon = document.querySelector("#cupon");
-    if (usuarioActual.metodoPago === "Tarjeta de crédito"){
+    if (usuarioActual.metodoPago === "Tarjeta de crédito") {
         RadioTarjeta.checked = true;
         const campoTarjeta = document.querySelector("#campo-texto-tarjeta");
+        const codigoTarjeta = document.querySelector("#codigo-texto-tarjeta");
         campoTarjeta.placeholder = usuarioActual.numeroTarjeta;
+        codigoTarjeta.placeholder = usuarioActual.codTarjeta;
+
     }
-    if (usuarioActual.metodoPago === "Cupón de pago"){
+    if (usuarioActual.metodoPago === "Cupón de pago") {
         radioCupon.checked = true;
-        if (usuarioActual.tipoCupon[0] === "Pago Fácil"){  //Pongo el 0 para que se fije en la primera posicion del array
+        if (usuarioActual.tipoCupon[0] === "Pago Fácil") {  //Pongo el 0 para que se fije en la primera posicion del array
             const checkboxPagoFacil = document.querySelector("#PF").checked = true;
         }
-        if (usuarioActual.tipoCupon[0] === "RapiPago"){  //Pongo el 0 para que se fije en la primera posicion del array
+        if (usuarioActual.tipoCupon[0] === "RapiPago") {  //Pongo el 0 para que se fije en la primera posicion del array
             const checkboxRapiPago = document.querySelector("#RP").checked = true;
         }
     }
-    if (usuarioActual.metodoPago === "Transferencia bancaria"){
+    if (usuarioActual.metodoPago === "Transferencia bancaria") {
         const transferenciaBancaria = document.querySelector("#Transferencia").checked = true;
     }
 }
@@ -285,10 +296,14 @@ document.querySelectorAll('input[name="opcion-pago"]').forEach(radio => {//El fo
             const codigoTarjeta = document.querySelector("#codigo-texto-tarjeta");
             if (campoTarjeta) {
                 campoTarjeta.value = "";
-                campoTarjeta.placeholder="Numero de tarjeta";
+                campoTarjeta.placeholder = "Numero de tarjeta";
             }
 
-            if (codigoTarjeta) codigoTarjeta.value = "";
+            if (codigoTarjeta) {
+                codigoTarjeta.value = "";
+                codigoTarjeta.placeholder ="XXX";
+            }
+
         }
 
         cuponError.textContent = "";

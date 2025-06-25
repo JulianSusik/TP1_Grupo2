@@ -2,7 +2,6 @@
     margin: 0;
     padding: 0;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    color: #a59de9;
 }
 
 body {
@@ -39,7 +38,7 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-
+     color: #a59de9;
 }
 .mensaje-error{
     color: red;
@@ -58,7 +57,7 @@ body {
 
 .perfil__avatar img {
     border-radius: 50%;
-    border: 1px solid black;
+    border: 1px solid #a59de9;;
 }
 
 .perfil__datos {
@@ -175,6 +174,7 @@ h4 {
 }
 
 .similares h3 {
+     color: #a59de9;
     margin-bottom: 10px;
     text-align: center;
 }

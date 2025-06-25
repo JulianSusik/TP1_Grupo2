@@ -4,7 +4,7 @@
 }
 
 body {
-    background-color: #c9c6ff;
+    background-color: #262643;
 }
 
 /*Le ponemos border-box para que no se exceda del width y genere scroll horizontal*/
@@ -21,6 +21,7 @@ body {
     justify-content: center;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 2em;
+    color: #a59de9;
 }
 
 .main__primary {
@@ -55,6 +56,7 @@ body {
     height: 100%;
     width: 45%;
     text-align: right;
+    color: #a59de9;
 }
 
 .main__primary__form--items input {
